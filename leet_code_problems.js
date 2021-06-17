@@ -46,3 +46,29 @@ var isValid = function (s) {
     if (parentheses.length > 0) return false;
     return true;
 };
+
+//953 Alien Sorted
+var isAlienSorted = function (words, order) {
+    let lengths = words.map(word => word.length);
+    let maxLength = Math.max(...lengths)
+    for (i = 0; i < words.length - 1; i++) {
+        let firstWord = words[i];
+        let secondWord = words[i + 1];
+        for (let j = 0; j < firstWord.length; j++) {
+            let wordOneVal = firstWord[j] ? order.indexOf(firstWord[j]) : undefined;
+            let wordTwoVal = secondWord[j] ? order.indexOf(secondWord[j]) : undefined;
+
+            if (wordTwoVal == undefined) return false;
+            if (wordOneVal == undefined) break;
+            let value = wordOneVal - wordTwoVal;
+            if (value == 0) {
+                continue;
+            } else if (value < 0) {
+                break;
+            } else {
+                return false
+            }
+        }
+    }
+    return true;
+}
