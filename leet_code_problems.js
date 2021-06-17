@@ -1,7 +1,7 @@
 // 14 Longest Common Prefix
 var longestCommonPrefix = function (strs) {
     var testValue;
-    if (strs.any(word => word == '')) return '';
+    if (strs.some(word => word == '')) return '';
     if (strs.every(word => word[0] === strs[0][0])) {
         testValue = strs[0][0]
     } else {
@@ -17,4 +17,32 @@ var longestCommonPrefix = function (strs) {
         }
     }
     return testValue
+};
+
+// 20 Valid Parentheses
+
+var isValid = function (s) {
+    let opening = {
+        '(': 1,
+        '[': 2,
+        '{': 3
+    }
+    let closing = {
+        ')': 1,
+        ']': 2,
+        '}': 3
+    }
+
+    let parentheses = [];
+    for (let i = 0; i<s.length; i++) {
+        if (opening[s[i]]) {
+            parentheses.push(s[i])
+        } else if (closing[s[i]] == opening[parentheses.pop()]) {
+            continue;
+        } else {
+            return false;
+        }
+    }
+    if (parentheses.length > 0) return false;
+    return true;
 };
