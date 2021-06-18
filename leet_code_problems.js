@@ -151,3 +151,49 @@ Solution.prototype.pick = function (target) {
 
     return positions[Math.floor(Math.random() * positions.length)]
 };
+
+//155 Min Stack
+var MinStack = function () {
+    this.stack = [];
+};
+
+/** 
+ * @param {number} val
+ * @return {void}
+ */
+MinStack.prototype.push = function (val) {
+    if (this.stack.length == 0) {
+        this.stack.push({ val: val, min: val })
+    } else {
+        let currMin = this.stack[this.stack.length - 1].min
+        if (val < currMin) {
+            this.stack.push({ val: val, min: val })
+        } else {
+            this.stack.push({ val: val, min: currMin })
+        }
+    }
+
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function () {
+    let value = this.stack.pop()
+    return value.val;
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function () {
+    let value = this.stack[this.stack.length - 1]
+    return value.val
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function () {
+    return this.stack[this.stack.length - 1].min
+};
