@@ -197,3 +197,18 @@ MinStack.prototype.top = function () {
 MinStack.prototype.getMin = function () {
     return this.stack[this.stack.length - 1].min
 };
+
+//167 Two Sum II
+var twoSum = function (numbers, target) {
+    let i = 0;
+    let j = numbers.length - 1
+    while (j > i) {
+        if (numbers[i] + numbers[j] == target) {
+            return ([i + 1, j + 1])
+        } else if (numbers[i] + numbers[j] > target) {
+            j--
+        } else {
+            i++
+        }
+    }
+};
