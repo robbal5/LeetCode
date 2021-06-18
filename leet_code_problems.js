@@ -130,3 +130,24 @@ var halvesAreAlike = function (s) {
     })
     return testArr[0] == testArr[1]
 };
+
+//398 Random Pick Index
+var Solution = function (nums) {
+    this.nums = nums
+};
+
+/** 
+ * @param {number} target
+ * @return {number}
+ */
+Solution.prototype.pick = function (target) {
+    let positions = [];
+
+    for (i = 0; i < this.nums.length; i++) {
+        if (this.nums[i] == target) {
+            positions.push(i)
+        }
+    }
+
+    return positions[Math.floor(Math.random() * positions.length)]
+};
