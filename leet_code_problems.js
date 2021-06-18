@@ -117,3 +117,16 @@ var clumsy = function (n) {
     return result;
 
 };
+
+//1704 Determine if String Halves are Alike
+var halvesAreAlike = function (s) {
+    let vowels = 'aeiouAEIOU'.split('');
+    let midpoint = s.length / 2
+    let firstHalf = s.slice(0, midpoint)
+    let secondHalf = s.slice(midpoint)
+    let testArr = [firstHalf, secondHalf]
+    testArr = testArr.map(half => {
+        return half.split('').filter(letter => vowels.includes(letter)).length
+    })
+    return testArr[0] == testArr[1]
+};
