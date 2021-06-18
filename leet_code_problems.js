@@ -72,3 +72,48 @@ var isAlienSorted = function (words, order) {
     }
     return true;
 }
+
+//1006 Clumsy Factorial
+var clumsy = function (n) {
+    let ms = [];
+    let ks = [];
+    let subm = 1;
+
+    for (i = n; i > 0; i--) {
+        let diff = n - i;
+        switch (diff % 4) {
+            case 0:
+                subm *= i;
+                if (i == 1) ms.push(subm);
+                break;
+            case 1:
+                subm *= i;
+                if (i == 1) ms.push(subm);
+                break;
+            case 2:
+                subm = Math.floor(subm / i);
+                ms.push(subm);
+                subm = 1;
+                break
+            case 3:
+                ks.push(i);
+                break;
+        }
+    }
+    let result = 0;
+    let start = true;
+    while (ms.length != 0) {
+        console.log(result)
+        if (start) {
+            result += ms.shift();
+            start = false;
+        } else {
+            result -= ms.shift()
+        }
+        if (ks.length > 0) {
+            result += ks.shift();
+        }
+    }
+    return result;
+
+};
