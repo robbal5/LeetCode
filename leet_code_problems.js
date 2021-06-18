@@ -212,3 +212,62 @@ var twoSum = function (numbers, target) {
         }
     }
 };
+
+//384 Shuffle an Array
+
+//Fisher Yates algorithm is better implementation. Loop through once, swapping current index with random one after it
+var Solution = function (nums) {
+    this.nums = nums;
+
+};
+
+/**
+ * Resets the array to its original configuration and return it.
+ * @return {number[]}
+ */
+Solution.prototype.reset = function () {
+    return this.nums
+};
+
+/**
+ * Returns a random shuffling of the array.
+ * @return {number[]}
+ */
+Solution.prototype.shuffle = function () {
+    let shuffled = []
+    let copy = this.nums.slice();
+    let index;
+    let num;
+    while (copy.length > 0) {
+        index = Math.floor(Math.random() * copy.length);
+        console.log(index)
+        num = copy.splice(index, 1);
+        shuffled.push(num)
+    }
+    return shuffled;
+};
+
+//1753 Maximum Score removing stones
+var maximumScore = function (a, b, c) {
+    let max, others, min;
+    if (a >= b && a >= c) {
+        max = a;
+        others = [b, c]
+        min = c > b ? b : c;
+    } else if (b >= a && b >= c) {
+        max = b;
+        others = [a, c];
+        min = a > c ? c : a;
+    } else {
+        max = c;
+        others = [a, b]
+        min = a > b ? b : a;
+    }
+
+    if (others[0] + others[1] <= max) {
+        return others[0] + others[1]
+    } else {
+        return max + (Math.floor((others[0] + others[1] - max) / 2))
+    }
+
+};
