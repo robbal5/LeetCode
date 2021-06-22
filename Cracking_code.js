@@ -135,3 +135,29 @@ const URLify = function(string, length) {
      }
      return true;
  }
+
+ //Time Complexity: O(n) where n is the length of the first string
+ // Space Complexity: O(1) no new data dependent on the string length is created
+
+ //String Compression
+
+ function stringCompression(string) {
+     let currCharacter = string[0];
+     let count = 1;
+     let newString = currCharacter;
+     for (i = 1; i<string.length; i++) {
+         if (string[i] == currCharacter) {
+            count += 1;
+         } else {
+             currCharacter = string[i];
+             newString += (count + currCharacter);
+             count = 1;
+         }
+     }
+     newString += count;
+     console.log(newString)
+     return (newString.length < string.length) ? newString: string;
+ }
+
+ //Time Complexity: O(n) with n being the length of the string
+ //Space Complexity: O(1)
