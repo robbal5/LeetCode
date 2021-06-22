@@ -161,3 +161,34 @@ const URLify = function(string, length) {
 
  //Time Complexity: O(n) with n being the length of the string
  //Space Complexity: O(1)
+
+ //Rotate Matrix
+
+//[1, 2, 3]
+//[4, 5, 6]
+//[7, 8, 9]
+
+//[7 ,4, 1]
+//[8, 5, 2]
+//[9, 6, 3]
+
+// First column: [0,0] => [0,2], [1,0] => [0,1], [2,0] => [0,0]
+// second column: [1,0] => [0,1], [1,1] => [1,1], [1,2] => [2,1]
+
+//RULE : Swap the X and the Y for each, SWAP the Y for the other
+
+function rotateMatrix(matrix)  {
+    let newMatrix = []
+    for (let i = 0; i<matrix.length ; i++ ) {
+        newMatrix[i] = new Array(matrix.length)
+    }
+    for (let j = 0; j<matrix.length; j++) {
+        for (let k = 0; k< matrix.length; k++) {
+            let value = matrix[j][k];
+            let newX = k;
+            let newY = Math.abs(j-(matrix.length - 1))
+            newMatrix[newX][newY] = value
+        }
+    }
+    return newMatrix;
+}
