@@ -230,3 +230,26 @@ function zeroMatrix(matrix) {
 
 //Time Complexity: O(mn)
 //Space Complexity: O(1)
+
+//String Rotation
+
+function isSubstring(sub, string) {
+    return string.includes(sub)
+}
+function stringRotation(s1, s2) {
+    let index = 0;
+    let testString = s1[index];
+    let testIndex;
+    while (testString.length < s1.length) {
+       testIndex = s2.indexOf(testString);
+        if (testIndex == -1) {
+            return false;
+        } else if(testIndex + testString.length == s1.length) {
+            return isSubstring(s2.slice(0,testIndex), s1)
+        } else {
+            index++
+            testString += s1[index]
+        }
+    }
+    return false;
+}
