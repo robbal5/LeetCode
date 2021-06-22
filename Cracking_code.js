@@ -201,14 +201,30 @@ function rotateMatrix(matrix)  {
 function zeroMatrix(matrix) {
     let width = matrix[0].length;
     let height = matrix.length;
+    let zeroRows = [];
+    let zeroCols = [];
     for (i=0; i<height; i++) {
+        let test = 0;
         for (j=0; j<width; j++) {
             if (matrix[i][j] == 0) {
-                matrix[i] = new Array(width).fill(0);
+                zeroRows.push(i);
+                zeroCols.push(j);
                 break;
             }
         }
     }
+    zeroRows.forEach(row => {
+        matrix[row] = new Array(width).fill(0)
+        }
+    )
+    zeroCols.forEach(col => {
+        let x = 0;
+        while (x<height) {
+            matrix[x][col] = 0
+            x++
+        }
+    })
+
     return matrix;
 }
 
