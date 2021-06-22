@@ -71,10 +71,8 @@ const URLify = function(string, length) {
     for (i = 0; i< letters.length; i++) {
         
         let letter = letters[i]
-        console.log(letter)
         letterCount[letter] = letterCount[letter] ? letterCount[letter] + 1: 1;
     }
-    console.log(letterCount)
     let counts = Object.values(letterCount);
     let odds = 0
     if (letters.length % 2 == 0) {
@@ -86,6 +84,54 @@ const URLify = function(string, length) {
             if (counts[j]%2 != 0) odds += 1;
         }
     }
-    console.log(odds)
     return (odds == 1 )
+ }
+
+ //Time Complexity: O(n) with n being the length of the string
+ //Space Complexity: O(1) finite number of keys that could go into letterCount
+
+ // One Away
+ const oneAway = function(str1, str2) {
+     let firstLength = str1.length;
+     let secondLength = str2.length;
+     let diff = firstLength - secondLength;
+     let firstPosition = 0;
+     let secondPosition = 0;
+     let offset = 0;
+     switch(diff) {
+         case -1:
+             while (firstPosition < firstLength) {
+                 if (offset > 1) return false;
+                 if (str1[firstPosition] == str2[secondPosition + offset]) {
+                     firstPosition += 1;
+                     secondPosition += 1;
+                 } else {
+                     offset += 1
+                 }
+             }
+             break;
+        case 0:
+            while (firstPosition < firstLength) {
+                if (offset > 1) return false;
+                if (str1[firstPosition] != str2[firstPosition]) offset += 1;
+                firstPosition += 1;
+            }
+            break;
+        case 1:
+            while(firstPosition < firstLength) {
+                if (offset > 1) return false;
+                if (str1[firstPosition + offset] == str2[secondPosition]) { //string sting
+                    firstPosition += 1;
+                    secondPosition += 1;
+                } else {
+                    offset += 1
+                }
+            }
+            // Deletion
+
+            break;
+        default: 
+            return false;
+     }
+     return true;
  }
