@@ -192,3 +192,25 @@ function rotateMatrix(matrix)  {
     }
     return newMatrix;
 }
+
+//Time Complexity: O(n^2) where n is the size of the matrix(nxn)
+//Space complexity: O(n^2) where n is the size of the matrix
+
+//Zero Matrix
+
+function zeroMatrix(matrix) {
+    let width = matrix[0].length;
+    let height = matrix.length;
+    for (i=0; i<height; i++) {
+        for (j=0; j<width; j++) {
+            if (matrix[i][j] == 0) {
+                matrix[i] = new Array(width).fill(0);
+                break;
+            }
+        }
+    }
+    return matrix;
+}
+
+//Time Complexity: O(mn)
+//Space Complexity: O(1)
