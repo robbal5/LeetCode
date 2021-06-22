@@ -62,3 +62,30 @@ const URLify = function(string, length) {
 
 //Time Complexity: O(n) where n is the length of the new string
 //Space Complexity: O(n) with the new string to return 
+
+
+//Palindrome Permutation
+ const palindromePermutation = function(str) {
+    let letters = str.split(' ').join('');
+    let letterCount = {};
+    for (i = 0; i< letters.length; i++) {
+        
+        let letter = letters[i]
+        console.log(letter)
+        letterCount[letter] = letterCount[letter] ? letterCount[letter] + 1: 1;
+    }
+    console.log(letterCount)
+    let counts = Object.values(letterCount);
+    let odds = 0
+    if (letters.length % 2 == 0) {
+        return (counts.every(count => count %2 == 0))
+    } else  {
+
+
+        for (j = 0; j< counts.length; j++) {
+            if (counts[j]%2 != 0) odds += 1;
+        }
+    }
+    console.log(odds)
+    return (odds == 1 )
+ }
