@@ -86,3 +86,35 @@ function partition(node, partition) {
     return newHead;
 }
 
+function sumLists(list1, list2) {
+    let rollover = 0;
+    let newHead;
+    let testNode;
+    while(list1 || list2) {
+        let val1 = list1 ? list1.val : 0;
+        let val2 = list2 ? list2.val : 0;
+        let newVal = val1 + val2 + rollover;
+        if (newVal > 9) {
+            newVal = newVal % 10;
+            rollover = 1
+        }
+        else {
+            rollover = 0;
+        }
+        let newNode = new Node(newVal)
+        if (!newHead){
+            newHead = newNode;
+            testNode = newHead;
+        }  else {
+            testNode.next = newNode;
+            testNode = newNode;
+        }
+        list1 = list1.next;
+        list2 = list2.next;
+    }
+    if (rollover == 1) {
+        testNode.next = new Node(1)
+    }
+    return newHead; 
+}
+
