@@ -118,3 +118,45 @@ function sumLists(list1, list2) {
     return newHead; 
 }
 
+function palindrome(headNode) {
+    let trail = headNode;
+    let tail;
+    while (trail) {
+        if (trail.next) {
+            tail = trail.next
+        }
+        trail = tail;
+    }
+    let start = headNode;
+    let end = tail;
+    while (true) {
+        if (start == end) {
+            return true;
+        } else if (start.next == end) {
+            return (start.val == end.val)
+        } else if(start.val == end.val) {
+            start = start.next;
+            end = end.prev;
+            continue; 
+        } else {
+            return false;
+        }
+    }
+}
+
+function intersection(list1, list2) {
+    let listOneNodes = {};
+    let listOneTest = list1;
+    let listTwoTest = list2;
+    while (listOneTest) {
+        listOneNodes[listOneTest] = true;
+        listOneTest = listOneTest.next
+    }
+    while(listTwoTest) {
+        if (listOneNodes[listTwoTest]) return true;
+        listTwoTest = listTwoTest.next;
+    }
+    return false;
+}
+
+
