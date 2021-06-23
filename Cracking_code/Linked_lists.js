@@ -45,9 +45,44 @@ function returnKthToLast(head, k) {
         count++;
         testNode = testNode.next
     }
-    for (i = 0; i < count; i++) {
+    for (i = 1; i < k; i++) {
         testNode = testNode.prev
     }
     return testNode;
+}
+
+function deleteMiddle(node) {
+    if (node.next && node.prev){
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
+    }
+}
+
+function partition(node, partition) {
+    let lessValues = [];
+    let moreValues = [];
+    let testNode = node
+    while(testNode) {
+        if (node.value < partition) {
+            lessValues.push(node.value)
+        } else {
+            moreValues.push(node.value)
+        }
+        testNode = testNode.next
+    }
+    let newHead = new Node(lessValues.pop());
+    let iterativeNode = newHead;
+    while (lessValues.length && moreValues.length) {
+        let newNode;
+        if (lessValues.length) {
+            newNode = new Node(lessValues.pop());
+        } else {
+            newNode = new Node(moreValues.pop());
+        }
+        iterativeNode.next = newNode;
+        newNode.prev = iterativeNode;
+        iterativeNode = newNode
+    }
+    return newHead;
 }
 
