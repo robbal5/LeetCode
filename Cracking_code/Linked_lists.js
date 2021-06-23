@@ -38,3 +38,16 @@ function removeDupsTwo(node) {
 
 //Above is how to solve with no temp storage, two pointers, O(n^2) time complexity
 
+function returnKthToLast(head, k) {
+    let testNode = head;
+    let count = 1;
+    while (testNode.next) {
+        count++;
+        testNode = testNode.next
+    }
+    for (i = 0; i < count; i++) {
+        testNode = testNode.prev
+    }
+    return testNode;
+}
+
