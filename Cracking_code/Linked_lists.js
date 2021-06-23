@@ -159,4 +159,12 @@ function intersection(list1, list2) {
     return false;
 }
 
+function loopDetection(list, values = {}) {
+    if (list == null) return false;
+    if (values[list]) return true;
+    values[list] = list;
+    return loopDetection(list.next, values)
+}
 
+//Not optimal, makes us iterations through h + l, with h being non looped portion and l being looped portion
+// Takes O(n) space from recursion AND values memory
