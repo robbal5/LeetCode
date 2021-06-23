@@ -59,3 +59,25 @@ class MyQueue {
         return this.exitStack.pop();
     }
 }
+
+function sortStack(stack) {
+    if (stack.isEmpty()) return [];
+    let tempStack = new Stack();
+    let value;
+    while(!stack.isEmpty()) {
+        let value = stack.pop();
+        while(value) {
+            if (value >= tempStack.peek() || tempStack.length == 0 ) {
+                tempStack.push(value);
+                value = null;
+            } else {
+                stack.push(tempStack.pop())
+            }
+        }
+    }
+    while(!tempStack.isEmpty()){
+        stack.push(tempStack.pop())
+    }
+    return stack;
+
+}
