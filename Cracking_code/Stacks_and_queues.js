@@ -81,3 +81,60 @@ function sortStack(stack) {
     return stack;
 
 }
+
+class Animal {
+    constructor(type){
+        this.type = type;
+    }   
+}
+
+class Shelter {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    enqueue(animal) {
+        let newNode = new Node(animal)
+        if (this.head){
+            this.tail.next = newNode
+            this.tail = this.tail.next
+        } else {
+            this.head = newNode;
+            this.tail = newNode;
+        }
+    }
+
+    dequeueAny() {
+        let temp = this.tail
+        this.tail = this.tail.prev
+        this.tail.next = null;
+        return temp;
+    }
+
+    dequeueCat() {
+        let temp = this.tail
+        while (temp.animal.type != 'Cat') {
+            if (temp == null) return null;
+            temp = temp.prev
+        }
+        let next = temp.next;
+        let prev = temp.prev;
+        prev.next = next;
+        next.prev = prev;
+        return temp;
+    }
+
+    dequeueDog() {
+        let temp = this.tail
+        while (temp.animal.type != 'Dog') {
+            if (temp == null) return null;
+            temp = temp.prev
+        }
+        let next = temp.next;
+        let prev = temp.prev;
+        prev.next = next;
+        next.prev = prev;
+        return temp;
+    }
+}
