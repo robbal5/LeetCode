@@ -42,3 +42,8 @@ Question: Person goes down a line of lockers and toggles them (open/closed) for 
 
 Answer: Only squares remain open, becasue they have an odd number of factors. The answer is 10.
 
+## Poison
+Question: 1000 poison bottles, 7 days to get results, 10 test strips. Fastest way to get results?
+
+Answer: Use each test strip to represent a binary digit. Each bottle has an assigned number. If that number has a 1 at that location in it's binary representation, add it to the strip. End result will be the binary representation of the bottle number.
+

@@ -271,3 +271,68 @@ var maximumScore = function (a, b, c) {
     }
 
 };
+
+//Least common ancestor, deepest node in binary
+
+let deepestLevel = -1;
+let deepestNodes = [];
+
+function findDeepest(root, level) {
+    let nextLevel = level + 1
+    if (root) {
+        findDeepest(root.left, nextLevel)
+
+        if (level = deepestLevel) {
+            deepestNodes.push(root)
+        } else if (level > deepestLevel) {
+            deepestNodes = [root];
+        }
+        findDeepest(root.right, nextLevel)
+    }
+}
+
+function deepestNodes(root) {
+    findDeepest(root, 0);
+    return deepestNodes;
+}
+
+function leastCommonAncestor(root) {
+    let result = deepestNodes(root);
+    if (result.length == 1) {
+        return result[0].val
+    } 
+    let firstParent = result[0].parent;
+    let secondParent = reslut[1].parent;
+    while (firstParent != secondParent) {
+        firstParent = firstParent.parent;
+        secondParent = secondParent.parent;
+    }
+
+    return firstParent;
+
+}
+
+// OR
+ function lcaDeepestLeaves(root) {
+     let maxLevel = -1;
+     let answer = root;
+     function dfs(node, level) {
+         if (level > maxLevel) {
+             maxLevel = level;
+         }
+
+         if (!node) {
+             return level
+         }
+
+         let left = dfs(node.left, level + 1);
+         let right = dfs(node.right, level + 1);
+         if (left == right && right == maxLevel ) {
+             answer = node;
+         }
+         return left > right ? left : right;
+     }
+
+     dfs(root, 0);
+     return answer;
+ }
