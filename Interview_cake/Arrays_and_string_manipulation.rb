@@ -57,4 +57,14 @@ def merge_meetings(meetings)
     return merged_meetings
 end
 
-print merge_meetings(  [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]])
+# print merge_meetings(  [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]])
+
+def reverse_in_place(str)
+    midpoint = str.length/2
+    midpoint.times do |idx|
+        str[idx], str[-1 - idx] = str[-1 -idx], str[idx]
+    end
+    return str
+end
+
+print reverse_in_place('racecar')
