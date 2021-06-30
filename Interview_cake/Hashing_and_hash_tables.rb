@@ -37,4 +37,22 @@ def permutation_palindrome2(string)
     end
     unpaired_chars.length <= 1
 end
-puts permutation_palindrome2('ividcc')
+# puts permutation_palindrome2('ividcc')
+
+def word_cloud(string)
+    letters = "abcdefghijklmnopqrstuvwxyz'-"
+    curr_string = ''
+    words = Hash.new(0)
+    string.each_char do |char|
+        if !letters.include?(char.downcase)
+            words[curr_string] += 1 if curr_string != ''
+            curr_string = ''
+        else
+            curr_string += char.downcase 
+        end
+    end
+    words[curr_string] += 1 if curr_string != ''
+    words
+end
+
+puts word_cloud("We came, we saw, we conquered...then we ate Bill's (Mille-Feuille) cake.")
