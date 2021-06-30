@@ -127,4 +127,52 @@ end
   my_array     = [3, 4, 6, 10, 11, 15]
 alices_array = [1, 5, 8, 12, 14, 19]
 
-print merge_sorted(my_array, alices_array)
+# print merge_sorted(my_array, alices_array)
+
+# O(n) space and time
+def customer_orders(arr1, arr2, served) 
+    served_hash = {}
+    served.each_with_index do |order, idx|
+        served_hash[order] = idx
+    end
+    (0...arr1.length - 1).each do |idx|
+        if served_hash[arr1[idx]] > served_hash[arr1[idx + 1]]
+            return false;
+        end
+    end
+    (0...arr2.length - 1).each do |idx|
+        if served_hash[arr2[idx]] > served_hash[arr2[idx + 1]]
+            return false;
+        end
+    end
+    return true;
+end
+
+order1 = [5, 6, 7, 8]
+order2 = [1, 2, 3, 4]
+served = [1, 2, 5, 3, 7,6, 8, 4]
+
+# puts customer_orders(order1, order2, served)
+
+def customer_orders2(arr1, arr2, served)
+    arr1_index = 0
+    arr2_index = 0
+    served_index = 0
+    while (served_index <= served.length)
+        case(served[served_index])
+
+        when arr1[arr1_index]
+            arr1_index += 1
+        when arr2[arr2_index]
+            arr2_index += 1
+        else
+            return false
+        end
+        served_index += 1
+    end
+    return true
+end
+
+puts customer_orders(order1, order2, served)
+
+
