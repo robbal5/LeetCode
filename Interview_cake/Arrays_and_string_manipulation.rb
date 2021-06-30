@@ -73,7 +73,8 @@ def reverse_words(words)
     start_idx = nil
     last_idx = nil
     words.each_char.with_index do |char, idx|
-        if (char === ' ' || idx === words.length - 1)
+        if (char === ' ' || words.length - 1 == idx)
+            last_idx = idx if words.length - 1 === idx
             while (start_idx < last_idx)
                 words[start_idx], words[last_idx] = words[last_idx], words[start_idx]
                 start_idx += 1
@@ -81,6 +82,7 @@ def reverse_words(words)
             end
             start_idx = nil
             last_idx = nil
+        # elsif idx === words.length - 1
         else
             start_idx = start_idx || idx
             last_idx = idx
@@ -89,18 +91,15 @@ def reverse_words(words)
     return words
 end
 
-print reverse_words('hey there banana man')
+# print reverse_words('hey there you guys')
 
 def correct_reverse_words(words)
-    let begin_idx = 0;
-    let end_idx = words.length - 1;
-    let start_idx = 0;
-    let last_idx = words.length - 2;
-    while (start_idx < last_idx) 
-        let start_char = words[start_idx];
-        let last_char = words[last_idx];
-        if (start_char == ' ')
-
-            
+    middle = words.length / 2;
+    middle.times do |idx| 
+        words[idx], words[-1-idx] = words[-1-idx], words[idx]
     end
+    # return words
+    return reverse_words(words)
 end
+
+print correct_reverse_words('here lies the dude')
