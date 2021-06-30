@@ -102,4 +102,29 @@ def correct_reverse_words(words)
     return reverse_words(words)
 end
 
-print correct_reverse_words('here lies the dude')
+# print correct_reverse_words('here lies the dude')
+
+def merge_sorted(arr1, arr2)
+    arr1.reverse!
+    arr2.reverse!
+    sorted = []
+    while ((!arr1.empty?) && (!arr2.empty?) )
+        case (arr1[-1] <=> arr2[-1])
+        when -1
+            sorted.push(arr1.pop)
+        else
+            sorted.push(arr2.pop)
+        end
+        print arr1
+        print arr2
+        puts
+    end
+    
+    print sorted
+    return sorted +arr1 + arr2 
+end
+
+  my_array     = [3, 4, 6, 10, 11, 15]
+alices_array = [1, 5, 8, 12, 14, 19]
+
+print merge_sorted(my_array, alices_array)
