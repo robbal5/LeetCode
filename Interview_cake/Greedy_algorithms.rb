@@ -98,4 +98,28 @@ def product_of_three3(arr)
     
 end
 array_of_ints = [-1000, -10, -5, 1, -100, 12, -8]
-puts product_of_three3(array_of_ints)
+# puts product_of_three3(array_of_ints)
+
+def product_of_others(arr)
+    pre_products = [1]
+    post_products = [1]
+    arr.each_with_index do |num, idx|
+        if (idx == 0)
+            post_products.push(post_products.last * arr[-1 -idx])
+        elsif (idx == arr.length - 1)
+            pre_products.push(pre_products.last*arr[idx - 1])
+        else
+            pre_products.push(pre_products.last * arr[idx - 1])
+            post_products.push(post_products.last * arr[-1 - idx])
+        end
+    end
+    print pre_products
+    puts
+    print post_products
+    puts
+    pre_products.zip(post_products.reverse).map{|x,y| x*y}
+end
+
+products_arr = [3,1,2,5,6,4]
+puts product_of_others(products_arr)
+
