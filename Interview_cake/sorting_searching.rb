@@ -64,5 +64,22 @@ def find_duplicate(array)
     floor
 end
 
-dup_arr = [1,2,3,3,4,5,6,7,8,9]
-puts find_duplicate(dup_arr)
+# dup_arr = [1,2,3,3,4,5,6,7,8,9]
+# puts find_duplicate(dup_arr)
+
+def top_scores(scores, max)
+    count = Array.new(max, 0)
+    scores.each do |score|
+        count[score] += 1
+    end
+    sorted = []
+    count.each_with_index do |num, idx|
+        num.times do 
+            sorted.push(idx)
+        end
+    end
+    return sorted.reverse
+end
+
+print top_scores([37, 89, 41, 65, 65, 65, 89, 88, 91, 53], 100)
+puts 
