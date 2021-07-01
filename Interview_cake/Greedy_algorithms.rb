@@ -121,5 +121,29 @@ def product_of_others(arr)
 end
 
 products_arr = [3,1,2,5,6,4]
-puts product_of_others(products_arr)
+# puts product_of_others(products_arr)
 
+# Importance here is basically having to go through it twice. We greedily grab from the front and greedily grab from the back populating as necessary
+
+def cafe_orders(arr1, arr2, serve)
+    first_idx = 0
+    second_idx = 0
+    serve_idx = 0
+    while serve_idx < serve.length
+        if (arr1[first_idx] == serve[serve_idx] && first_idx < arr1.length)
+            first_idx += 1
+        elsif (arr2[second_idx] == serve[serve_idx] && second_idx < arr2.length)
+            second_idx += 1
+        else
+            return false
+        end
+        serve_idx += 1
+    end
+    first_idx == arr1.length && second_idx == arr2.length
+end
+
+arr = [1, 3, 5]
+arr2 = [2, 4, 6]
+served = [1, 2, 4, 6, 5, 3]
+
+puts cafe_orders(arr, arr2, served)
