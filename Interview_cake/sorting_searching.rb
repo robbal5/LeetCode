@@ -14,7 +14,7 @@ def find_rotation_point(array)
             return array[guess]
         end
     end
-    false
+    return ceiling
 end
   words = [
     'ptolemaic',
