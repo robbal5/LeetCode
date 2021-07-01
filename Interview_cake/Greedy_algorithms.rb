@@ -146,4 +146,21 @@ arr = [1, 3, 5]
 arr2 = [2, 4, 6]
 served = [1, 2, 4, 6, 5, 3]
 
-puts cafe_orders(arr, arr2, served)
+# puts cafe_orders(arr, arr2, served)
+
+def inplace_shuffle(arr)
+    max_index = arr.length - 1
+    arr.each_with_index do |num, idx|
+        swap_index = (rand(max_index - idx + 1)) + idx
+        arr[idx], arr[swap_index] = arr[swap_index], arr[idx]
+    end
+    return arr
+end
+
+print inplace_shuffle([1,2,3,4,5,6])
+puts
+print inplace_shuffle([1,2,3,4,5,6])
+puts 
+print inplace_shuffle([1,2,3,4,5,6])
+puts
+print inplace_shuffle([1,2,3,4,5,6])
