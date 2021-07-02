@@ -1,3 +1,5 @@
+require 'byebug'
+
 def find_rotation_point(array)
     floor = -1
     ceiling = array.length
@@ -81,5 +83,26 @@ def top_scores(scores, max)
     return sorted.reverse
 end
 
-print top_scores([37, 89, 41, 65, 65, 65, 89, 88, 91, 53], 100)
-puts 
+# print top_scores([37, 89, 41, 65, 65, 65, 89, 88, 91, 53], 100)
+# puts 
+
+def merge_meetings(meetings)
+    meetings.sort!
+    condensed = []
+    meetings.each_with_index do |meeting, idx|
+       if idx === 0
+             condensed.push(meeting) 
+             next
+       end
+       recent_meeting = condensed.last
+       if (recent_meeting[1] >= meeting[0])
+            recent_meeting[1] = [meeting[1], recent_meeting[1]].max
+       else
+            condensed.push(meeting)
+       end
+     end
+     condensed
+end
+meetings =   [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]]
+  meetings2 = [[1, 5], [2, 3]]
+print merge_meetings(meetings2)
