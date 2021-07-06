@@ -36,5 +36,21 @@ def is_perfectly_balanced(head)
   abs(depths.min - depths.max) <= 1
 
 end
+
+valid_binary_search(root) 
+    nodes = [{'node' => root, 'upper_bound' => nil, 'lower_bound' => nil}]
+
+  while nodes.length > 0
+    node = nodes.pop
+    if ((node['upper_bound'] && node['node'].value > node['upper_bound']) || (node['lower_bound']&& node['node'].value < node['lower_bound']))
+      return false
+    end
+    nodes.push({'node' => node['node'].left, 'upper_bound' => node['node'].value, 'lower_bound' =>  node['lower_bound']}) if node['node'].left
+    nodes.push({'node' => node['node'].right, 'upper_bound' => node['upper_bound'],'lower_bound' =>  node['node'].value}) if node['node'].right
+  end
+  true
+end
+
+
   
 
