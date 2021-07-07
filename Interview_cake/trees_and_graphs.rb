@@ -1,3 +1,5 @@
+require 'set'
+
 class BinaryTreeNode
 
   attr_accessor :value
@@ -82,7 +84,17 @@ def second_largest_element(root)
     previous = node
     node = node.right
   end
-  return node
+  return node.value
+end
+
+def color_graph(nodes, colors)
+  nodes.each do |node|
+    if node.neighbors.include?(node)
+      raise ArgumentError, 'illegal coloring cannot be assigned to graphs containing loops'
+    end
+    illegal_colors = node.neighbors.map(node => node.color).compact.to_set
+    node.color = colors.find(color => !illegal_colors.include?(color))
+  end
 end
 
 
