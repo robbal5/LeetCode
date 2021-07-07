@@ -97,6 +97,30 @@ def color_graph(nodes, colors)
   end
 end
 
+def mesh_messages(network, start, finish)
+  return [start] if start == finish
+  touched = Set.new
+  queue = [[start, []]]
+  while !queue.empty?
+    person = queue.shift
+    name = person[0]
+    previous = person[1] << name
+    if touched.include?(name)
+      next
+    else
+      touch.add(name)
+    end
+    network[name].each do |connection|
+      if connection == finish
+        return previous
+      else
+        queue << [connection, previous]
+      end
+    end
+  end
+  raise ArgumentError, 'no possible route connection the users'
+end
+
 
   
 
