@@ -37,6 +37,7 @@ def is_perfectly_balanced(head)
 
 end
 
+# Can be done recursively as well
 valid_binary_search(root) 
     nodes = [{'node' => root, 'upper_bound' => nil, 'lower_bound' => nil}]
 
@@ -49,6 +50,39 @@ valid_binary_search(root)
     nodes.push({'node' => node['node'].right, 'upper_bound' => node['upper_bound'],'lower_bound' =>  node['node'].value}) if node['node'].right
   end
   true
+end
+
+
+#Largest element
+def largest_element(root)
+  node = root
+  while node.right
+    node = node.right
+  end
+  node.value
+end
+#Second largest element
+def second_largest_element(root)
+  node = root
+  left = false
+  previous = nil
+  while !left
+    if node.right
+      previous = node
+      node = node.right
+    elsif node.left
+      previous = node
+      node = node.left
+      left = true
+    else
+      return previous.value
+    end
+  end
+  while node.right
+    previous = node
+    node = node.right
+  end
+  return node
 end
 
 
