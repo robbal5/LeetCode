@@ -1,3 +1,4 @@
+require 'byebug'
 class Stack
 
   # Initializes an empty stack.
@@ -57,3 +58,40 @@ class MaxStack < Stack
         @items.pop
     end
 end
+
+class TwoStackQueue
+  def initialize()
+    @enter_stack = []
+    @exit_stack = []
+  end
+
+  def enqueue(item)
+    @enter_stack << item
+    print @enter_stack
+    puts
+  end
+
+  def dequeue
+  
+    if @exit_stack.empty?
+      if @enter_stack.empty?
+        return nil
+      else
+         @enter_stack.length.times do
+          @exit_stack << @enter_stack.pop
+         end
+         @exit_stack.pop
+      end
+    else
+      @exit_stack.pop
+    end
+  end
+end
+
+# tester = TwoStackQueue.new
+# tester.enqueue('hey')
+# tester.enqueue('there')
+# puts tester.dequeue
+# tester.enqueue('mister')
+# puts tester.dequeue
+
