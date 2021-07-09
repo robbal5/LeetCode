@@ -66,4 +66,24 @@ def make_change2(total, denominations)
     ways[total]
 end
 
-puts make_change2(4,[1,2,3])
+# puts make_change2(4,[1,2,3])
+
+#return max monetary value possible
+# cakes looks like [[weight, value], [weight, value]]
+def max_duffel_bag_value(cakes, capacity)
+    maxes = {0 => 0}
+    (1..capacity).each do |constraint|
+        current_max = 0
+        cakes.each do |cake|
+            next if cake[1] == 0
+            if (constraint - cake[0] >= 0)
+                test_value = cake[1] + maxes[constraint - cake[0]]
+                current_max = test_value > current_max ? test_value : current_max
+            end
+        end
+        maxes[constraint] = current_max
+    end
+    maxes[capacity]
+end
+
+puts max_duffel_bag_value(  [[0,0],[3, 40], [5, 70]], 12)
