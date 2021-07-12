@@ -50,3 +50,35 @@ def has_cycle2?(head)
     end
     false
 end
+
+def reverse_linked_list(head)
+    current_node = head
+    prev_node = nil
+    next_node = nil
+    while current_node
+        next_node = current_node.next
+        current_node.next = prev_node
+        prev_node = current_node
+        current_node = next_node
+    end
+    prev_node
+end
+
+def kth_element(head, num)
+    raise 'k is zero' if k == 0
+    current_node = head
+    nodes = 1
+    while current_node.next
+        current_node = current_node.next
+        nodes += 1
+    end
+    raise 'k greater than linked list length' if k > nodes
+    new_node = head
+    (nodes-num).times do 
+        new_node = new_node.next
+    end
+    new_node
+  
+
+end
+# Can also do with two pointers num elements apart
