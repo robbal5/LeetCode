@@ -336,3 +336,37 @@ function leastCommonAncestor(root) {
      dfs(root, 0);
      return answer;
  }
+
+ function addTwoNumbers(l1, l2) {
+     let first_node = l1
+     let second_node = l2
+     let sum_node = null
+     let next_node
+     let new_value
+     let remainder = 0
+     while ( first_node|| second_node){
+         first_value = first_node ? first_node.val : 0;
+         second_value = second_node ? second_node.val : 0;
+         new_value = first_value + second_value + remainder
+         if (new_value > 9) {
+            remainder = 1
+            new_value = new_value % 10
+         } else {
+             remainder = 0
+         }
+         if (sum_node) {
+             next_node.next = new ListNode(new_value)
+             next_node = next_node.next
+         } else {
+             sum_node = new ListNode(new_value)
+             next_node = sum_node
+         }
+         first_node = first_node ? first_node.next : null
+         second_node = second_node ? second_node.next : null
+     }
+     if (remainder == 1) {
+         next_node.next = new ListNode(1)
+     }
+
+     return sum_node 
+ }
