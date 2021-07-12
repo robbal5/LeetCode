@@ -337,6 +337,8 @@ function leastCommonAncestor(root) {
      return answer;
  }
 
+
+ // Problem 3, add Two Numbers
  function addTwoNumbers(l1, l2) {
      let first_node = l1
      let second_node = l2
@@ -370,3 +372,39 @@ function leastCommonAncestor(root) {
 
      return sum_node 
  }
+
+ // Problem 4, Longest Substring w/o repeating
+
+var lengthOfLongestSubstring = function (string) {
+    if (string.length == 0) return 0
+    let firstMarker = 0
+    let secondMarker = 0
+    let maxCount = 1
+    let currentCount = 1
+    let uniqueChars = {}
+    uniqueChars[string[firstMarker]] = firstMarker
+    while (secondMarker < string.length - 1) {
+        secondMarker += 1
+        if (string[secondMarker] in uniqueChars) {
+            uniqueChars = filterObjectByIndex(uniqueChars, uniqueChars[string[secondMarker]])
+            // console.log(uniqueChars)
+            uniqueChars[string[secondMarker]] = secondMarker
+            currentCount = Object.values(uniqueChars).length
+        } else {
+            uniqueChars[string[secondMarker]] = secondMarker
+            currentCount += 1
+            maxCount = maxCount > currentCount ? maxCount : currentCount
+        }
+        console.log(string[secondMarker])
+        console.log(currentCount)
+    }
+    return maxCount
+};
+
+var filterObjectByIndex = function (object, index) {
+    let newVal = Object.keys(object)
+        .filter(key => object[key] > index)
+        .reduce((res, key) => Object.assign(res, { [key]: object[key] }), {})
+    // console.log(newVal)
+    return newVal
+}
