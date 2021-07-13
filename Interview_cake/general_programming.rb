@@ -45,3 +45,46 @@ end
 
   [highest_start_point, overlap_length]
 end
+
+# Temperature Tracker
+
+class TempTracker
+    def initialize()
+        @all_temps = []
+        @max_temp = []
+        @min_temp = []
+        @total = 0.0
+        @temp_times = Hash.new {|h,k| h[k] = 0}
+        @max_times = 0
+        @max_times_temp = nil
+    end
+
+    def insert(item)
+        @all_temps << item
+        @total += item
+        @max_temp << item if (item >= @max_temp.last)
+        @min_temp << item if (item <= @min_temp.last)
+        @temp_times[item] += 1
+        if @temp_times[item] > @max_times
+            @max_times = @temp_times[item]
+            @max_times_temp = item
+        end
+    end
+
+    def get_max()
+        @all_temps.last ? @max_temp.last : nil
+    end
+
+    def get_min()
+        @all_temps.last ? @min_temp.last : nil
+    end
+
+    def get_mean()
+        @total / @all_temps.length
+    end
+
+    def get_mode()
+        @max_times_temp
+    end
+
+end
