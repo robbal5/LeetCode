@@ -408,3 +408,46 @@ var filterObjectByIndex = function (object, index) {
     // console.log(newVal)
     return newVal
 }
+
+// Better solution, two pointer and array
+var lengthOfLongestSubstring = function (s) {
+    let a = []
+    let maximum = 0;
+    let i = 0;
+    let j = 0;
+    while (i < s.length && j < s.length) {
+        console.log('i is ', i)
+        console.log('j is ', j)
+        console.log(a)
+        console.log('------')
+        if (!a.includes(s[j])) {
+            a.push(s[j])
+            maximum = Math.max(maximum, a.length)
+            j++;
+        }
+        else {
+            a.shift(s[i])
+            i++;
+        }
+    }
+    return maximum
+}
+
+// Total Matches, problem 1688
+var numberOfMatches = function (n) {
+    totalMatches = 0
+    while (n > 1) {
+        if (n % 2 == 1) {
+            totalMatches += ((n - 1) / 2 + 1)
+            n = (n - 1) / 2
+        }
+        else {
+            totalMatches += n / 2
+            n = n / 2
+        }
+
+    }
+    return totalMatches
+};
+
+// Problem 673, Number of Longest Increasing Subsequences
