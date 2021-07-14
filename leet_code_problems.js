@@ -451,3 +451,20 @@ var numberOfMatches = function (n) {
 };
 
 // Problem 673, Number of Longest Increasing Subsequences
+
+//35 Search Input Position
+var searchInsert = function (nums, target) {
+    console.log(nums)
+    if (target < nums[0]) return 0;
+    if (target > nums[nums.length - 1]) return nums.length;
+    let middle = Math.floor(nums.length / 2)
+    if (nums[middle] == target) {
+        return middle
+    } else if (nums[middle] < target) {
+        if (nums[middle + 1] > target) return middle + 1;
+        return middle + 1 + searchInsert(nums.slice(middle + 1), target)
+    } else {
+        if (nums[middle - 1] < target) return middle;
+        return searchInsert(nums.slice(0, middle), target)
+    }
+};
