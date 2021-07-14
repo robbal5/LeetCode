@@ -38,8 +38,19 @@ def get_random(floor, ceiling)
     floor + (rand()*(ceiling - floor)).round
 end
 
-10.times do 
-    print in_place_shuffle(sorted)
-    puts
-end
+# 10.times do 
+#     print in_place_shuffle(sorted)
+#     puts
+# end
 
+def five_sided_dice()
+    num = 0
+    while (num < 1 || num > 5)
+        num = get_random(1,7)
+    end
+    num
+end 
+
+# 10.times do 
+#     puts five_sided_dice()
+# end
