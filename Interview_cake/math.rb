@@ -23,5 +23,23 @@ end
 
 sorted = [1,2,3,4,5,6,7,8,9,10]
 
-puts check_integer_in_sorted(sorted, 8)
+# puts check_integer_in_sorted(sorted, 8)
 # puts check_integer_in_sorted(sorted, 3)
+
+def in_place_shuffle(array)
+    (array.length).times do |idx|
+        random_int = get_random(idx, array.length-1)
+        array[idx], array[random_int] = array[random_int], array[idx]
+    end
+    array
+end
+
+def get_random(floor, ceiling)
+    floor + (rand()*(ceiling - floor)).round
+end
+
+10.times do 
+    print in_place_shuffle(sorted)
+    puts
+end
+
