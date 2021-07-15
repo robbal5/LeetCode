@@ -54,3 +54,18 @@ end
 # 10.times do 
 #     puts five_sided_dice()
 # end
+
+def seven_sided_dice()
+    done = false
+    until done
+        first_num = five_sided_dice()
+        second_num = five_sided_dice()
+        return first_num if first_num == second_num
+        return first_num + second_num if (first_num == 5 && second_num == 2 || first_num == 5 && second_num == 1)
+    end
+end
+
+10.times do 
+    puts seven_sided_dice()
+end
+ 
