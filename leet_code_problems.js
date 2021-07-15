@@ -520,3 +520,25 @@ var isSubPath = function (head, root) {
     return !testValue;
 
 };
+
+// Problem 83 Remove Duplicates
+var deleteDuplicates = function (head) {
+    if (!head) return null
+    let seen = [head.val]
+    let testNode = head
+    let start = new ListNode(head.val)
+    let currNode = start
+    while (testNode) {
+        if (seen.includes(testNode.val)) {
+
+        } else {
+            seen.push(testNode.val);
+            currNode.next = new ListNode(testNode.val)
+            currNode = currNode.next
+        }
+        testNode = testNode.next
+    }
+
+    return start
+
+};
