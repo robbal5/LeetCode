@@ -468,3 +468,55 @@ var searchInsert = function (nums, target) {
         return searchInsert(nums.slice(0, middle), target)
     }
 };
+
+// Problem 1367 Linked List in Binary Tree
+
+var isSubPath = function (head, root) {
+    let count = 0;
+    let headTester = head;
+    while (headTester) {
+        count += 1
+        headTester = headTester.next
+    }
+    let valueNodes = [];
+    let stack = [root];
+    let found = false;
+    let testNode;
+    let startList = head;
+    while (stack.length > 0) {
+        testNode = stack.pop();
+        if (testNode.right) stack.push(testNode.right)
+        if (testNode.left) stack.push(testNode.left)
+        if (testNode.val == head.val) {
+            found = true;
+            valueNodes.push(testNode)
+        }
+    }
+    if (!found) return false;
+    let gotIt = false
+    let nextNodes
+    let testValue = startList.next
+    while (valueNodes.length > 0 && testValue) {
+        gotIt = false
+        nextNodes = []
+        valueNodes.forEach(node => {
+            if (node.right && node.right.val == testValue.val) {
+                nextNodes.push(node.right)
+                gotIt = true
+            }
+            if (node.left && node.left.val == testValue.val) {
+                nextNodes.push(node.left)
+                gotIt = true
+            }
+
+        })
+        if (gotIt) {
+            valueNodes = nextNodes
+            testValue = testValue.next
+        } else {
+            return false
+        }
+    }
+    return !testValue;
+
+};
