@@ -561,3 +561,49 @@ var closestDivisors = function (num) {
         }
     }
 };
+
+// 1047 Remove Adjacent Duplicates from string
+var removeDuplicates = function (s) {
+    let stack = [s[0]];
+    let index = 1
+    while (index < s.length) {
+        if (stack[stack.length - 1] == s[index]) {
+            stack.pop()
+            index += 1
+            continue;
+        }
+        stack.push(s[index])
+        index += 1
+    }
+    return stack.join('')
+
+};
+
+//1470 Shuffle given array
+var shuffle = function (nums, n) {
+    let newArr = [];
+    let start = 0;
+    let secondMarker = n
+    while (start < n) {
+        newArr.push(nums[start]);
+        newArr.push(nums[secondMarker]);
+        start++
+        secondMarker++
+    }
+    return newArr
+};
+
+//1078 Occurrences After Bigram
+var findOcurrences = function (text, first, second) {
+    let words = text.split(' ');
+    let results = [];
+    let start = 0;
+    while (start < words.length - 2) {
+        if (words[start] == first && words[start + 1] == second) {
+            results.push(words[start + 2])
+        }
+        start++
+    }
+    return results
+};
+
