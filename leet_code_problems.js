@@ -607,3 +607,23 @@ var findOcurrences = function (text, first, second) {
     return results
 };
 
+var getMinimumDifference = function (root) {
+    let values = [];
+    var dfs = function (node) {
+        if (node != null) {
+            dfs(node.left)
+            values.push(node.val)
+            dfs(node.right)
+        }
+    }
+    dfs(root)
+    let minDiff = values[1] - values[0]
+    let start = 1;
+    while (start < values.length - 1) {
+        if (values[start + 1] - values[start] < minDiff) {
+            minDiff = values[start + 1] - values[start]
+        }
+        start++
+    }
+    return minDiff
+};
