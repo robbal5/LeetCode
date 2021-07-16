@@ -542,3 +542,22 @@ var deleteDuplicates = function (head) {
     return start
 
 };
+
+//1262 Closest Divisor
+var closestDivisors = function (num) {
+    let first = Math.ceil(Math.sqrt(num))
+    let second = first
+    let product;
+    let diff;
+    while (first > 0 && second <= num + 1) {
+        product = first * second;
+        diff = product - num
+        if (diff > 0 && diff <= 2) {
+            return [first, second]
+        } else if (diff > 2) {
+            first -= 1
+        } else {
+            second += 1
+        }
+    }
+};
