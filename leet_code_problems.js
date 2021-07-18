@@ -650,3 +650,50 @@ var connect = function (root) {
     return root;
 
 };
+
+var validIPAddress = function (IP) {
+    let check4 = checkIP4V(IP);
+    let check6 = checkIP6V(IP);
+    if (check4) {
+        return 'IPv4'
+    } else if (check6) {
+        return 'IPv6'
+    } else {
+        return 'Neither'
+    }
+
+};
+
+function checkIP4V(testAddress) {
+    let addressArr = testAddress.split('.');
+    if (addressArr.length != 4) return false;
+    let accurate = true;
+    let numRep;
+    addressArr.forEach(num => {
+        numRep = parseInt(num)
+        if (numRep <= 255 && numRep >= 0 && num.length == numRep.toString().length) {
+            return
+        } else {
+            accurate = false
+        }
+    })
+    return accurate;
+}
+
+function checkIP6V(testAddress) {
+    let validChars = '0123456789abcdefABCDEF'
+    let addressArr = testAddress.split(':');
+    if (addressArr.length != 8) return false;
+    let accurate = true;
+    addressArr.forEach(spot => {
+        if (spot.length < 1 || spot.length > 4) {
+            accurate = false;
+        }
+        spot.split('').forEach(char => {
+            if (!validChars.includes(char)) {
+                accurate = false;
+            }
+        })
+    })
+    return accurate;
+}
