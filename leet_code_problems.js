@@ -627,3 +627,26 @@ var getMinimumDifference = function (root) {
     }
     return minDiff
 };
+
+
+var connect = function (root) {
+    let queue = [root];
+    let rowTotal = 1;
+    let newQueue
+    while (queue.length > 0) {
+        newQueue = [];
+        queue.forEach((node, idx) => {
+            if (!node) return
+            if (node.left) {
+                newQueue.push(node.left);
+                newQueue.push(node.right);
+            }
+            if (queue[idx + 1]) {
+                node.next = queue[idx + 1]
+            }
+        })
+        queue = newQueue;
+    }
+    return root;
+
+};
