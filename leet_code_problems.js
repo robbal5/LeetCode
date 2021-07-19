@@ -697,3 +697,21 @@ function checkIP6V(testAddress) {
     })
     return accurate;
 }
+
+var selfDividingNumbers = function (left, right) {
+    let selfDividers = [];
+    let numString;
+    while (left <= right) {
+        numString = left.toString();
+        if (numString.length == 1) {
+            selfDividers.push(parseInt(numString))
+        } else if (numString.split('').every(char => {
+            return left % parseInt(char) == 0
+        })) {
+            selfDividers.push(parseInt(numString))
+        }
+        left += 1;
+    }
+    return selfDividers;
+
+};
