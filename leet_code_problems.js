@@ -755,3 +755,56 @@ var canBeIncreasing = function (nums) {
     if (endErrors < 2 || errors < 2) return true;
     return false;
 };
+
+var numSteps = function (s) {
+    let num = 0;
+    let reverseString = s.split('').reverse().join('');
+    let multiplier = 1;
+    for (i = 0; i < reverseString.length; i++) {
+        if (reverseString[i] == '1') {
+            num += multiplier;
+        }
+        multiplier *= 2
+    }
+    let steps = 0;
+    while (num != 1) {
+        steps += 1
+        if (num % 2 == 0) {
+            num /= 2
+        } else {
+            num += 1
+        }
+    }
+    return steps;
+};
+
+var numSteps = function (s) {
+    let steps = 0;
+    let currLength;
+    let carry;
+    let sArr;
+    let sample;
+    while (s != '1') {
+        steps += 1;
+        currLength = s.length;
+        if (s[currLength - 1] == '0') {
+            sample = s.split('');
+            sample.pop();
+            s = sample.join('')
+        } else {
+            sArr = s.split('')
+            for (let i = currLength - 1; i >= 0; i--) {
+                if (sArr[i] == '1') {
+                    sArr[i] = '0';
+                } else {
+                    sArr[i] = '1';
+                    break;
+                }
+            }
+            if (sArr[0] == '0') sArr.unshift('1')
+            s = sArr.join('')
+        }
+    }
+    return steps;
+};
+
