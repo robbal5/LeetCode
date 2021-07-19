@@ -715,3 +715,43 @@ var selfDividingNumbers = function (left, right) {
     return selfDividers;
 
 };
+
+[1,1,3,4,10]
+
+
+// Combination of sorting and greedy
+// 1798 Max number of consecutive values
+function getMaxConsecutive(coins) {
+    const length = coins.length;
+    coins.sort((a,b) => {return a - b });
+    if (coins[0] > 1) return 1;
+    let max = coins[0];
+    for (let i = 1; i<length; i++) {
+        if (coins[i] > max + 1) return max + 1;
+        max += coins[i]
+    }
+    return max + 1
+}
+//Problem 1909
+var canBeIncreasing = function (nums) {
+    let reverse = nums.slice().reverse();
+    let startNum = nums[0];
+    let endNum = reverse[0];
+    let errors = 0;
+    let endErrors = 0;
+    for (let i = 1; i < nums.length; i++) {
+        if (startNum < nums[i]) {
+            startNum = nums[i]
+        } else {
+            errors += 1;
+        }
+        if (endNum > reverse[i]) {
+            endNum = reverse[i]
+        } else {
+            endErrors += 1
+        }
+    }
+    console.log(errors, endErrors)
+    if (endErrors < 2 || errors < 2) return true;
+    return false;
+};
