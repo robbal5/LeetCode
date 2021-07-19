@@ -808,3 +808,12 @@ var numSteps = function (s) {
     return steps;
 };
 
+var numIdenticalPairs = function (nums) {
+    let goodPairs = 0;
+    for (i = 0; i < nums.length - 1; i++) {
+        for (j = i + 1; j < nums.length; j++) {
+            if (nums[i] == nums[j]) goodPairs += 1;
+        }
+    }
+    return goodPairs;
+};
