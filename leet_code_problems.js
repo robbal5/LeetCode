@@ -817,3 +817,31 @@ var numIdenticalPairs = function (nums) {
     }
     return goodPairs;
 };
+
+var generateMatrix = function (n) {
+    let matrix = [];
+    let total = n ** 2;
+    for (let a = 0; a < n; a++) {
+        matrix[a] = [];
+        for (var m = 0; m < n; m++) {
+            matrix[a][m] = total + 1;
+        }
+    }
+
+    let directions = [[0, 1], [1, 0], [0, -1], [-1, 0]], d = 0, r, c;
+    let i = 0, j = 0, start = 1;
+    while (start <= total) {
+
+        matrix[i][j] = start;
+        start += 1;
+        r = (i + directions[d][0]) % n;
+        c = (j + directions[d][1]) % n;
+
+        if (!matrix[r][c] || matrix[r][c] != total + 1) {
+            d = (d + 1) % 4;
+        }
+        i += directions[d][0];
+        j += directions[d][1];
+    }
+    return matrix
+};
