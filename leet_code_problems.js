@@ -867,3 +867,28 @@ var distributeCoins = function (root) {
 
     return totalSteps;
 };
+
+var reverseVowels = function (s) {
+    let sArr = s.split('')
+    let vowels = 'aeiouAEIOU'
+    let start = 0;
+    let end = s.length - 1;
+    while (start < end) {
+        if (vowels.includes(sArr[start])) {
+            if (vowels.includes(sArr[end])) {
+                if (start != end) {
+                    temp = s[start];
+                    sArr[start] = s[end];
+                    sArr[end] = temp;
+                    start++
+                    end--
+                }
+            } else {
+                end--
+            }
+        } else {
+            start++
+        }
+    }
+    return sArr.join('')
+};
