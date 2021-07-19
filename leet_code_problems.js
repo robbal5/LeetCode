@@ -845,3 +845,25 @@ var generateMatrix = function (n) {
     }
     return matrix
 };
+//979 Distribute coins
+var distributeCoins = function (root) {
+
+    let totalSteps = 0;
+
+    function dfs(node) {
+
+        if (node == null) return 0;
+        let leftTree = dfs(node.left)
+        let rightTree = dfs(node.right)
+        console.log(leftTree)
+        console.log(rightTree)
+        totalSteps += (Math.abs(leftTree) + Math.abs(rightTree))
+        return node.val + leftTree + rightTree - 1
+
+
+    }
+
+    dfs(root);
+
+    return totalSteps;
+};
