@@ -892,3 +892,84 @@ var reverseVowels = function (s) {
     }
     return sArr.join('')
 };
+
+//Brute force
+
+var longestSubstring = function (s, k) {
+    let chars = s.length;
+    let start = 0;
+    let subStrings;
+    while (chars > 0) {
+        subStrings = [];
+        for (let i = start; i < s.length; i++) {
+            if ((i + chars) > s.length) break;
+            subStrings.push(s.slice(i, i + chars))
+        }
+        if (subStrings.some(sub => {
+            return checkCounts(sub, k)
+        })) {
+            return chars
+        } else {
+            chars -= 1;
+        }
+    }
+    return chars
+};
+
+var checkCounts = function (string, k) {
+    let hash = {};
+    let char;
+    for (i = 0; i < string.length; i++) {
+        char = string[i]
+        hash[char] = hash[char] ? hash[char] + 1 : 1;
+    }
+    let result = Object.values(hash).every(val => {
+        return val >= k
+    })
+    return result
+
+}
+
+//Recursive
+var longestSubstring = function (s, k) {
+    let values = [0];
+    function checkString(string, num) {
+        if (string.length < 1) return;
+        let count = {};
+        let char;
+        let valid = true;
+        for (i = 0; i < string.length; i++) {
+            char = string[i];
+            count[char] = count[char] ? count[char] + 1 : 1;
+        }
+        for (j = 0; j < string.length; j++) {
+            if (count[string[j]] < num) {
+                checkString(string.slice(0, j), num);
+                checkString(string.slice(j + 1, string.length), num)
+                valid = false;
+                break;
+            }
+        }
+        if (valid) {
+            values.push(string.length)
+        }
+
+    }
+    checkString(s, k)
+    return Math.max(...values)
+}
+
+//In order traversal
+var inorderTraversal = function (root) {
+    let nodes = [];
+
+    function dfs(node) {
+        if (node != null) {
+            dfs(node.left);
+            nodes.push(node.val);
+            dfs(node.right);
+        }
+    }
+    dfs(root);
+    return nodes;
+};
