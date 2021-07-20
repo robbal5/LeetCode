@@ -973,3 +973,32 @@ var inorderTraversal = function (root) {
     dfs(root);
     return nodes;
 };
+
+var minDeletionSize = function (strs) {
+    let deletions = 0;
+    let words = strs.length
+    let col = strs[0].length;
+    let inOrder = {};
+    for (let i = 0; i < col; i++) {
+        let j;
+        for (j = 0; j < words - 1; j++) {
+            if (!inOrder[j] && strs[j][i] > strs[j + 1][i]) {
+                deletions += 1;
+                break;
+            }
+        }
+
+        if (j < words - 1) {
+            continue;
+        }
+
+        for (let m = 0; m < words - 1; m++) {
+
+            if (strs[m][i] < strs[m + 1][i]) {
+                inOrder[m] = true;
+            }
+        }
+        console.log(inOrder)
+    }
+    return deletions;
+}
