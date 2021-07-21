@@ -1002,3 +1002,67 @@ var minDeletionSize = function (strs) {
     }
     return deletions;
 }
+
+//148 in place, O(n^2) too slow
+var sortList = function(head) {
+console.log(head)
+let prevNode = null
+let nextNode
+let currNode
+let sorted = false
+let start = head
+let count
+while (!sorted) {
+    sorted = true
+    count = 0
+    currNode = start
+    prevNode = null
+    while (currNode) {
+
+        nextNode = currNode.next
+        if (nextNode && currNode.val > nextNode.val) {
+            currNode.next = nextNode.next
+            nextNode.next = currNode
+            sorted = false
+            if (prevNode) prevNode.next = nextNode
+            if (count == 0) {
+                start = nextNode
+            }
+        }
+        prevNode = currNode
+        currNode = nextNode
+        count += 1
+    }
+
+}
+
+return start  
+    }
+
+// Create new list
+var sortList = function (head) {
+    if (!head) return head
+    let values = [];
+    currNode = head
+    while (currNode) {
+        values.push(currNode.val)
+        currNode = currNode.next
+    }
+    values.sort((a, b) => { return a - b })
+    let node
+    let start = head
+    let currentNode = null
+    values.forEach((val, idx) => {
+        node = new ListNode(val)
+        if (currentNode) {
+            currentNode.next = node
+            currentNode = node
+        } else {
+            start = node
+            currentNode = node
+        }
+    })
+    return start
+
+}
+
