@@ -1066,3 +1066,17 @@ var sortList = function (head) {
 
 }
 
+// 559
+var maxDepth = function (root) {
+    if (!root) return 0;
+    maxD = 1
+    function printChildren(node, depth) {
+        if (node == null) return;
+        if (depth > maxD) maxD = depth
+        node.children.forEach(child => {
+            printChildren(child, depth + 1)
+        })
+    }
+    printChildren(root, 1)
+    return maxD
+};
