@@ -16,4 +16,24 @@ function sortMeetings(meetings) {
     return ending_list
 }
 
-console.log(sortMeetings([[1, 10], [2, 5], [6, 8], [9, 10], [10, 12]]))
+function reverseString(stringArr) {
+    let temp;
+    for (let i = 0; i <Math.floor(stringArr.length / 2); i++) {
+        temp = stringArr[i]
+        stringArr[i] = stringArr[stringArr.length - 1 - i]
+        stringArr[stringArr.length - 1 - i] = temp
+    }
+    return stringArr
+}
+
+// console.log(reverseString([1,2,3,4,5,6,7]))
+
+function reverseWords(wordsArr) {
+    wordsArr.reverse()
+    words = wordsArr.join('').split(' ')
+    words = words.map(word => {
+        return word.split('').reverse().join('')
+    })
+    return words.join(' ').split('').join('')
+}
+
