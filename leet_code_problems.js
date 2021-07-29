@@ -1120,3 +1120,31 @@ var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
 
     return results
 };
+
+//1669 Merge Linked Lists
+var mergeInBetween = function (list1, a, b, list2) {
+    let count = 0;
+    let startNode;
+    let endNode;
+    let currNode = list1;
+    while (count <= b) {
+        if (count + 1 == a) {
+            startNode = currNode
+        }
+        if (count == b) {
+            endNode = currNode.next
+        }
+        currNode = currNode.next
+        count += 1
+    }
+
+    startNode.next = list2;
+    secondCurrNode = list2;
+    while (secondCurrNode.next) {
+        secondCurrNode = secondCurrNode.next
+    }
+    secondCurrNode.next = endNode
+    return list1
+
+
+};

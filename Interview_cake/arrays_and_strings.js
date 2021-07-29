@@ -75,3 +75,15 @@ function inFlightEntertainment(flightLength, movies) {
     }
     return false
 }
+
+function checkPalindrome(string) {
+    let chars = {}
+    for (let i = 0; i < string.length; i++) {
+        chars[string[i]] = !chars[string[i]]
+    }
+    let odds = 0;
+    Object.values(chars).forEach(value => {
+        if (value) odds += 1
+    })
+    return odds <= 1
+}
