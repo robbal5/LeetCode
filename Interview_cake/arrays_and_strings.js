@@ -65,5 +65,13 @@ function ordersInOrder(takeaway,dineIn,served) {
 }
 
 function inFlightEntertainment(flightLength, movies) {
-    
+    flightSet = new Set()
+    for (let i = 0; i<movies.length; i++) {
+        if (flightSet.has(flightLength - movies[i])) {
+            return true
+        } else {
+            flightSet.add(movies[i])
+        }
+    }
+    return false
 }
