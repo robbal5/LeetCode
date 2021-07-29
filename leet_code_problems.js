@@ -1080,3 +1080,43 @@ var maxDepth = function (root) {
     printChildren(root, 1)
     return maxD
 };
+
+// check if prereq, 1462
+var checkIfPrerequisite = function (numCourses, prerequisites, queries) {
+    let courses = {}
+    let results = []
+    let result
+    prerequisites.forEach((pre) => {
+
+        let firstCourse = pre[0]
+        let secondCourse = pre[1]
+        if (courses[firstCourse]) {
+            courses[firstCourse].push(secondCourse)
+        } else {
+            courses[firstCourse] = [secondCourse]
+        }
+    })
+    function checkNext(entry, last, fullObj) {
+
+        if (!fullObj[entry]) return;
+        fullObj[entry].forEach((other) => {
+            console.log(other, last)
+            if (other == last) {
+
+                result = true
+            } else {
+                checkNext(other, last, fullObj)
+            }
+        })
+    }
+
+
+    queries.forEach(query => {
+        result = false;
+        checkNext(query[0], query[1], courses)
+        results.push(result)
+    })
+
+
+    return results
+};

@@ -37,3 +37,33 @@ function reverseWords(wordsArr) {
     return words.join(' ').split('').join('')
 }
 
+function mergeArrays(myArray,yourArray) {
+    let merged = []
+    while (myArray.length > 0 && yourArray.length > 0) {
+        if (myArray[0] < yourArray[0]) {
+            merged.push(myArray.shift())
+        } else {
+            merged.push(yourArray.shift())
+        }
+    }
+    return merged.concat(myArray).concat(yourArray)
+}
+
+function ordersInOrder(takeaway,dineIn,served) {
+    let servedPos = 0, takeawayPos = 0, dineInPos = 0
+    while (servedPos < served.length) {
+        if (served[servedPos] == takeaway[takeawayPos]) {
+            takeawayPos += 1;
+        } else if (served[servedPos] == dineIn[dineInPos]) {
+            dineInPos += 1
+        } else {
+            return false
+        }
+        servedPos += 1
+    }
+    return takeawayPos == takeaway.length && dineInPos == dineIn.length
+}
+
+function inFlightEntertainment(flightLength, movies) {
+    
+}
