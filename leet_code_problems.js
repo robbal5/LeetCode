@@ -1288,3 +1288,36 @@ var minDepth = function (root) {
     }
     return minDepth
 };
+ //Better recursive from Anjusha1613
+var minDepth = function (root) {
+    if (root === null) return 0;
+
+    //If there is no left subTree then traverse right subtree only
+    if (root.left === null) return 1 + minDepth(root.right);
+
+    //If there is no right subTree then traverse left subtree only
+    if (root.right === null) return 1 + minDepth(root.left);
+
+    //Otherwise return the min of the height of right and left subtree
+    return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+};
+
+//Flip and invert image
+var flipAndInvertImage = function (image) {
+    let newImg = image.map(row => {
+        let i = 0;
+        let j = row.length - 1
+        while (i < j) {
+            let temp = row[i];
+            row[i] = row[j];
+            row[j] = temp;
+            i += 1;
+            j -= 1;
+        }
+        let newRow = row.map(item => {
+            return item == 1 ? 0 : 1;
+        })
+        return newRow
+    })
+    return newImg
+};
