@@ -1148,3 +1148,111 @@ var mergeInBetween = function (list1, a, b, list2) {
 
 
 };
+
+//Doesn't work, stack overflow
+var updateMatrix = function (mat) {
+    function checkNeighbors(pos, matrix) {
+        if (matrix[pos[0]][pos[1]] == 0) {
+            return 0
+        }
+        let neighborPos = [[pos[0] + 1, pos[1]], [pos[0] - 1, pos[1]], [pos[0], pos[1] + 1], [pos[0] - 1, pos[1]]]
+        let values = []
+
+        for (let i = 0; i < neighborPos.length; i++) {
+            let temp = neighborPos[i];
+            if (temp[0] >= matrix.length || temp[0] < 0 || temp[1] >= matrix[0].length || temp[1] < 0) continue;
+            if (matrix[temp[0]][temp[1]] == 0) {
+                return 1
+            } else {
+                values.push(checkNeighbors(temp, matrix) + 1)
+            }
+        }
+        console.log(values)
+        return Math.min(...values)
+    }
+    let finalMatrix = [];
+    for (let i = 0; i < mat.length; i++) {
+        finalMatrix[i] = new Array(mat[0].length);
+    }
+    for (let i = 0; i < mat.length; i++) {
+        for (let j = 0; j < mat[0].length; j++) {
+            let val = checkNeighbors([i, j], mat)
+            finalMatrix[i][j] = val
+        }
+    }
+    return finalMatrix
+};
+
+var updateMatrix = function (mat) {
+    let finalMatrix = [];
+    for (let i = 0; i < mat.length; i++) {
+        finalMatrix[i] = new Array(mat[0].length);
+    }
+    let check = 0;
+    for (let i = 0; i < mat.length; i++) {
+        for (let j = 0; j < mat[0].length; j++) {
+            if (mat[i][j] == 0) {
+                finalMatrix[i][j] = 0;
+            }
+        }
+    }
+    function getNeighbors(a, b) {
+        return [[a + 1, b], [a - 1, b], [a, b + 1], [a, b - 1]]
+    }
+
+    let finished = false
+    let neighbors
+    while (!finished) {
+        finished = true;
+        for (let i = 0; i < mat.length; i++) {
+            for (let j = 0; j < mat[0].length; j++) {
+                if (finalMatrix[i][j] == undefined) {
+                    finished = false
+                    neighbors = getNeighbors(i, j)
+                    neighbors.forEach(neighbor => {
+                        if (neighbor[0] < 0 || neighbor[0] >= mat.length || neighbor[1] < 0 || neighbor[1] >= mat[0].length) {
+                            return
+                        }
+                        if (finalMatrix[neighbor[0]][neighbor[1]] == check) {
+                            finalMatrix[i][j] = check + 1
+                        }
+                    })
+                }
+            }
+        }
+        check += 1
+    }
+    return finalMatrix
+
+};
+
+// Map Sum
+
+var MapSum = function () {
+    this.map = {}
+};
+
+/** 
+ * @param {string} key 
+ * @param {number} val
+ * @return {void}
+ */
+MapSum.prototype.insert = function (key, val) {
+    this.map[key] = val
+};
+
+/** 
+ * @param {string} prefix
+ * @return {number}
+ */
+MapSum.prototype.sum = function (prefix) {
+    let keys = Object.keys(this.map)
+    let values = Object.values(this.map)
+    let sum = 0;
+    keys.forEach((key, idx) => {
+        if (key.startsWith(prefix)) {
+            sum += values[idx]
+        }
+    })
+    return sum
+};
