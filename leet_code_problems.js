@@ -1256,3 +1256,17 @@ MapSum.prototype.sum = function (prefix) {
     })
     return sum
 };
+
+//49 Group Anagrams
+var groupAnagrams = function (strs) {
+    let strHash = {};
+    strs.forEach(string => {
+        let sorted = string.split('').sort().join('');
+        if (strHash[sorted]) {
+            strHash[sorted].push(string);
+        } else {
+            strHash[sorted] = [string]
+        }
+    });
+    return Object.values(strHash)
+};
