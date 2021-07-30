@@ -1270,3 +1270,21 @@ var groupAnagrams = function (strs) {
     });
     return Object.values(strHash)
 };
+
+// 111 Min Depth Binary Tree
+var minDepth = function (root) {
+    if (!root) return root;
+    let minDepth = Infinity;
+    let q = [[root, 1]], curr;
+    while (q.length > 0) {
+        curr = q.shift();
+        if (!curr[0].left && !curr[0].right) {
+            if (curr[1] < minDepth) minDepth = curr[1];
+        } else {
+            if (curr[1] >= minDepth) continue;
+            if (curr[0].left) q.push([curr[0].left, curr[1] + 1]);
+            if (curr[0].right) q.push([curr[0].right, curr[1] + 1]);
+        }
+    }
+    return minDepth
+};
