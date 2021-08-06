@@ -1360,3 +1360,15 @@ var maxSubArray = function (nums) {
     }
     return currMax;
 };
+
+//110 Height Balanced Binary
+var isBalanced = function (root) {
+    if (!root) return true
+    function checkDepth(node) {
+        if (!node) return 0
+        let left = 1 + checkDepth(node.left)
+        let right = 1 + checkDepth(node.right)
+        return Math.max(left, right)
+    }
+    return Math.abs(checkDepth(root.left) - checkDepth(root.right)) < 2 && isBalanced(root.right) && isBalanced(root.left)
+};

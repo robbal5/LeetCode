@@ -98,3 +98,5 @@ def minSwaps2(arr)
 end
 
 puts minSwaps2([8,1,7,2,4,6,5,3])
+
+
