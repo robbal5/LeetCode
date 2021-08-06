@@ -1372,3 +1372,26 @@ var isBalanced = function (root) {
     }
     return Math.abs(checkDepth(root.left) - checkDepth(root.right)) < 2 && isBalanced(root.right) && isBalanced(root.left)
 };
+
+var isSameTree = function (p, q) {
+    let pQueue = [p]
+    let qQueue = [q]
+    let pNode, qNode, pVal, qVal
+    while (pQueue.length > 0) {
+        pNode = pQueue.shift();
+        qNode = qQueue.shift();
+        if (qNode == null && pNode == null) {
+            continue
+        }
+        pVal = pNode ? pNode.val : null;
+        qVal = qNode ? qNode.val : null;
+        if (pVal == qVal) {
+            if (pVal != null) pQueue.push(pNode.left, pNode.right)
+            if (qVal != null) qQueue.push(qNode.left, qNode.right)
+        } else {
+            return false
+        }
+
+    }
+    return pQueue.length == qQueue.length
+};
