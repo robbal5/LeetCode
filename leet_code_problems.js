@@ -1343,3 +1343,20 @@ var mergeTwoLists = function (l1, l2) {
 
     return head.next
 };
+
+// Max Subarray
+var maxSubArray = function (nums) {
+    let currMax = nums[0];
+    let testMax = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        if (testMax <= 0 && nums[i] > testMax) {
+            testMax = nums[i]
+            currMax = currMax > testMax ? currMax : testMax;
+        } else {
+            testMax += nums[i];
+            currMax = testMax > currMax ? testMax : currMax;
+        }
+        console.log('currMax', currMax)
+    }
+    return currMax;
+};
