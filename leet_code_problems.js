@@ -1502,3 +1502,17 @@ var postorderTraversal = function (root) {
     getValues(root)
     return values
 };
+
+// Invert Binary Tree
+var invertTree = function (root) {
+    function invert(node) {
+        if (!node) return node
+        let temp = node.left
+        node.left = node.right
+        node.right = temp
+        invert(node.left)
+        invert(node.right)
+        return node
+    }
+    return invert(root)
+};
