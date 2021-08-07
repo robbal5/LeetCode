@@ -1430,3 +1430,10 @@ var maxDepth = function (root) {
     return maxDepth
 };
 
+// 108 Convert Sorted Array to Binary Search Tree
+var sortedArrayToBST = function (nums) {
+    if (nums.length == 0) return null;
+    let middle = Math.floor(nums.length / 2)
+    let node = new TreeNode(nums[middle], sortedArrayToBST(nums.slice(0, middle)), sortedArrayToBST(nums.slice(middle + 1)))
+    return node
+};
