@@ -1405,3 +1405,28 @@ var isSymmetric = function (root) {
     }
     return checkSymmetry(root.left, root.right)
 };
+
+//104 Max Depth Binary Tree
+
+var maxDepth = function (root) {
+    function getDepth(node) {
+        if (node == null) return 0;
+        return Math.max(1 + getDepth(node.left), 1 + getDepth(node.right))
+    }
+    return getDepth(root)
+};
+
+var maxDepth = function (root) {
+    let maxDepth = 0;
+    function getDepth(node, currDepth) {
+        if (node == null) {
+            maxDepth = maxDepth < currDepth ? currDepth : maxDepth;
+            return
+        }
+        getDepth(node.left, currDepth + 1)
+        getDepth(node.right, currDepth + 1)
+    }
+    getDepth(root, 0)
+    return maxDepth
+};
+
