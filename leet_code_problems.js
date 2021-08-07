@@ -1437,3 +1437,26 @@ var sortedArrayToBST = function (nums) {
     let node = new TreeNode(nums[middle], sortedArrayToBST(nums.slice(0, middle)), sortedArrayToBST(nums.slice(middle + 1)))
     return node
 };
+
+//112 Path Sum Binary Tree
+
+var hasPathSum = function (root, targetSum) {
+    if (!root) return false
+    let found = false
+    function hereWeGo(node, value) {
+
+        if (found || node == null) return
+        let newValue = value + node.val
+        if (!node.left && !node.right) {
+            if (newValue == targetSum) {
+                found = true
+            }
+            return
+        }
+
+        hereWeGo(node.left, newValue)
+        hereWeGo(node.right, newValue)
+    }
+    hereWeGo(root, 0)
+    return found
+};
