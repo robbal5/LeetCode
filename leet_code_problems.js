@@ -1460,3 +1460,45 @@ var hasPathSum = function (root, targetSum) {
     hereWeGo(root, 0)
     return found
 };
+
+//144 Binary Tree Preorder Traversal
+var preorderTraversal = function (root) {
+    let values = []
+    function getValues(node) {
+        if (!node) return
+        values.push(node.val)
+        getValues(node.left)
+        getValues(node.right)
+    }
+    getValues(root)
+    return values
+};
+ //Iterative
+var preorderTraversal = function (root) {
+
+    let values = []
+    if (!root) return values
+    let nodes = [root]
+    let node
+    while (nodes.length > 0) {
+        node = nodes.pop();
+        values.push(node.val)
+        if (node.right) nodes.push(node.right)
+        if (node.left) nodes.push(node.left)
+    }
+    return values
+};
+
+//Postorder Traversal
+var postorderTraversal = function (root) {
+    let values = []
+    function getValues(node) {
+        if (!node) return
+        getValues(node.left)
+        getValues(node.right)
+        values.push(node.val)
+
+    }
+    getValues(root)
+    return values
+};
