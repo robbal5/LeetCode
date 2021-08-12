@@ -360,6 +360,69 @@ class BinarySearchTree {
         }
         return results;
     }
+}
 
+//Hash Table
+function customHash(word, max) {
+    let val = 0;
+    for(let i = 0; i < word.length; i++) {
+        val += word.charCodeAt(i)
+    }
+    return val % max
+}
 
+class HashTable {
+    constructor() {
+        this.storage = [];
+        this.storageLimit = 4;
+    }
+
+    print() {
+        console.log(this.storage)
+    }
+
+    add(key, value) {
+        let index = customHash(key, this.storageLimit);
+        if (storage[index] === undefined) {
+            storage[index] = [[key, value]]
+        } else {
+            let inserted = false;
+            for (let i = 0; i<storage[index].length; i++) {
+                if (key === storage[index][i][0]) {
+                    storage[index][i][1] = value;
+                    inserted = true;
+                    break
+                }
+            } if (!inserted) {
+                storage[index].push([key,value])
+            }
+        }
+    }
+
+    remove(key) {
+        let index = customHash(key, this.storageLimit);
+        if (storage[index].length === 1 && storage[index][0][0] === key) {
+            delete storage[index];
+        } else {
+            for(let i = 0; i<storage[index].length; i++) {
+                if (storage[index][i][0] == key) {
+                    delete storage[index][i]
+                }
+            }
+        }
+    };
+
+    lookup(key) {
+        let index = customHash(key, storageLimit);
+        if (storage[index] === undefined) {
+            return undefined;
+        } else {
+            for (let i = 0; i<storage[index].length; i++) {
+                if (storage[index][i][0] === key) {
+                    return storage[index[i][1]]
+                }
+            }
+        }
+        return undefined
+    }
 }
