@@ -174,3 +174,85 @@ function PriorityQueue() {
         return value[0]
     }
 }
+
+//Binary Search Tree
+
+class Node {
+    constructor(data, left = null, right = null) {
+        this.data = data;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class BinarySearchTree {
+    constructor() {
+        this.root = null
+    }
+
+    add() {
+        const node = this.root;
+        if (node === null) {
+            this.root = new Node(data);
+            return
+        } else {
+            const searchTree = function(node) {
+                if (data < node.data) {
+                    if (node.left === null) {
+                        node.left = new Node(data);
+                        return 
+                    } else {
+                        return searchTree(node.left)
+                    }
+                } else if (data >node.data) {
+                    if (node.right === null) {
+                        node.right = new Node(data);
+                        return
+                    } else {
+                        return searchTree(node.right)
+                    }
+                } else {
+                    return null
+                }
+            }
+
+            searchTree(node)
+        }
+    }
+
+    findMin() {
+        let node = this.root
+        if (node === null) return null;
+        while (node.left != null) {
+            node = node.left
+        }
+        return node.data
+    }
+
+    findMax() {
+        let node = this.root;
+        if (node === null) return null;
+        while (node.right !== null) {
+            node = node.right
+        }
+        return node.data
+    }
+
+    find(data) {
+        let current = this.root;
+        while (current) {
+            if (current.data === data)  {
+                return current
+            } else if (current.data < data) {
+                current = current.right
+            } else {
+                current = current.left
+            } 
+        }
+        return null;
+    }
+
+    isPresent(data) {
+        return this.find(data) !== null;
+    }
+}
