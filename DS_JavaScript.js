@@ -681,3 +681,55 @@ let MinHeap = function() {
         return result;
     }
 }
+
+//Graphs
+//Collection of things and the links or connections between them
+//Data called nodes
+//Connections called edges
+
+//Adjacency list
+var undirectedG = {
+    NodeA: ['B'],
+    NodeB: ['A', 'C'],
+    NodeC: ['B']
+}
+
+//Adjacency matrix => Matrix of numbers, where numbers represent the edges (0 for no, 1 for yes)
+//Can be used for directed or undirected
+
+//Incidence Matrix
+//Two dimensional array where the rows are nodes, and the columns are edges
+
+//Graphs: BFS
+
+function bfs(graph, root) {
+    let nodesLen = {};
+
+    for (var i = 0; i<graph.length; i++) {
+        nodesLen[i] = Infinity
+    }
+
+    nodesLen[root] = 0;
+
+    let queue = [root];
+    let current;
+
+    while (queue.length > 0) {
+        current = queue.shift();
+        let currentConnected = graph[current];
+        let neighbors = [];
+        let index = currentConnected.indexOf(1);
+        while (index != -1) {
+            neighbors.push(index);
+            index = currentConnected.indexOf(1, index + 1) 
+        }
+
+        for (let j = 0; j<neighbors.length; j++) {
+            if (nodesLen[neighbors[j]] == Infinity) {
+                nodesLen[neighbors[j]] = nodes[Len[current] + 1];
+                queue.push(neighborIdx[j])
+            }
+        }
+    }
+    return nodesLen;
+}
