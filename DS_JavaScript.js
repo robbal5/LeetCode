@@ -426,3 +426,123 @@ class HashTable {
         return undefined
     }
 }
+
+//Linked List
+
+class LinkedList {
+    constructor() {
+        this.length = 0;
+        this.head = null;
+    }
+
+    Node(element) {
+        this.element = element;
+        this.next = null;
+    }
+
+    size() {
+        return this.length;
+    }
+
+    head() {
+        return this.head
+    }
+
+    add(element) {
+        let node = new Node(element);
+        if (this.head === null) {
+            this.head = null
+        } else {
+            currentNode = head
+            while (currentNode.next !== null) {
+                currentNode = currentNode.next
+            }
+            currentNode.next = node;
+        }
+        this.length++;
+    }
+
+    remove(element) {
+        let currentNode = this.head;
+        let previousNode;
+        if (currentNode.element === element) {
+            this.head = currentNode.next
+        } else {
+            while (currentNode.element !== element) {
+                previousNode = currentNode;
+                currentNode = currentNode.next
+            }
+            previousNode.next = currentNode.next
+        }
+        this.length--
+    }
+
+    isEmpty() {
+        return this.length === 0
+    }
+
+    indexOf(element) {
+        let currentNode = head;
+        let index = -1;
+        while(currentNode !== null) {
+            index++;
+            if (currentNode.element === element) {
+                return index
+            }
+            currentNode = currentNode.next
+        }
+        return -1;
+    }
+
+    elementAt(index) {
+        let currentNode = head;
+        let idx = -1;
+        while (currentNode !== null) {
+            idx += 1;
+            if (idx === index) {
+                return currentNode.element
+            }
+            currentNode = currentNode.next;
+         }
+         return -1;
+    }
+
+    addAt(index, element) {
+        let idx = 0;
+        let newNode = new Node(element);
+        let currentNode = this.head;
+        let prevNode;
+        if (index > this.length) return false;
+        if (index === 0) {
+            newNode.next = currentNode;
+            this.head = newNode;
+        } else {
+            while (idx < index) {
+                idx++;
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            prevNode.next = newNode;
+            newNode.next = currentNode;
+        }
+        this.length++
+    }
+
+    removeAt(index) {
+        let idx = 0;
+        let currentNode = this.head;
+        let prevNode;
+        if (index > this.length) return false;
+        if (index === 0) {
+            this.head = this.head.next
+        } else {
+            while (idx < index) {
+                idx++;
+                prevNode = currentNode;
+                currentNode = currentNode.next;
+            }
+            prevNode = currentNode.next;
+        }
+        this.length--;
+    }
+}
