@@ -96,3 +96,67 @@ var productExceptSelf = function (nums) {
     }
     return lefts
 };
+
+
+//Max Sum Subarray
+var maxSubArray = function (nums) {
+    let currMax = nums[0];
+    let testMax = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        if (testMax <= 0 && nums[i] > testMax) {
+            testMax = nums[i]
+            currMax = currMax > testMax ? currMax : testMax;
+        } else {
+            testMax += nums[i];
+            currMax = testMax > currMax ? testMax : currMax;
+        }
+        console.log('currMax', currMax)
+    }
+    return currMax;
+};
+
+// Time 60%, space 29%
+var maxSubArray = function (nums) {
+    let currentMax = nums[0];
+    let currentSum = nums[0];
+    for (let i = 1; i < nums.length; i++) {
+        if (currentSum < 0) {
+            currentSum = nums[i]
+        } else {
+            currentSum += nums[i]
+        }
+
+        currentMax = currentSum > currentMax ? currentSum : currentMax;
+    }
+    return currentMax
+};
+
+//Max Product Subarray
+// Time 16%, Space 73%
+var maxProduct = function (nums) {
+    let currMax = Number.NEGATIVE_INFINITY;
+    let currProduct = 1;
+    let currProduct2 = 1;
+    let foundFalse = false;
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] == 0) {
+            currMax = currMax > 0 ? currMax : 0;
+            currProduct = 1;
+            foundFalse = false;
+            currProduct2 = 1;
+
+        } else {
+            currProduct *= nums[i]
+            if (foundFalse) {
+                currProduct2 *= nums[i]
+                currMax = currProduct2 > currMax ? currProduct2 : currMax
+            }
+            else if (nums[i] < 0) {
+                foundFalse = true;
+            }
+
+            currMax = currProduct > currMax ? currProduct : currMax
+        }
+    }
+    return currMax;
+};
