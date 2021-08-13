@@ -226,7 +226,7 @@ var findMin = function (nums) {
 
 //DYNAMIC PROGRAMMING
 
-//Memoization
+// Number of Steps = Memoization
 var climbStairs = function (n) {
     let memo = {}
     function climb(number) {
@@ -239,4 +239,37 @@ var climbStairs = function (n) {
         return firstClimb + secondClimb
     }
     return climb(n)
+};
+
+//Coin Change
+
+//Memo with recursion
+var coinChange = function (coinsTotal, amountTotal) {
+    let memo = {};
+    function makeChange(coins, amount) {
+        if (amount < 0) return -1;
+        if (amount === 0) return 0;
+        if (coins.includes(amount)) return 1;
+        let ways = [];
+        let result;
+        for (let i = 0; i < coins.length; i++) {
+            if (memo[amount - coins[i]] != undefined) {
+                result = memo[amount - coins[i]]
+            } else {
+                result = makeChange(coins, amount - coins[i]);
+                memo[amount - coins[i]] = result
+            }
+            if (result !== -1) {
+                ways.push(result + 1)
+            }
+        }
+        if (ways.length == 0) {
+            return -1;
+        } else {
+            return Math.min(...ways)
+        }
+    }
+    result = makeChange(coinsTotal, amountTotal)
+    console.log(memo)
+    return result;
 };
