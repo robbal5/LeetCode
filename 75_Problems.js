@@ -160,3 +160,68 @@ var maxProduct = function (nums) {
     }
     return currMax;
 };
+
+//Time 58%, space 39%
+var maxProduct = function (nums) {
+    currMin = nums[0];
+    currMax = nums[0];
+    answer = nums[0];
+    let min, max;
+    for (let i = 1; i < nums.length; i++) {
+        let val = nums[i];
+        min = currMin;
+        max = currMax;
+        currMin = Math.min(val, min * val, max * val);
+        currMax = Math.max(val, min * val, max * val);
+        answer = Math.max(currMax, answer)
+    }
+    return answer
+};
+
+//Search for Min in rotated sorted array
+var findMin = function (nums) {
+    console.log(nums)
+    if (nums.length <= 2) return Math.min(...nums);
+    let middle = Math.floor(nums.length / 2);
+    let end = nums[nums.length - 1];
+    if (nums[middle] < nums[middle - 1]) {
+        return nums[middle]
+    } else if (nums[middle] < end) {
+        return findMin(nums.slice(0, middle))
+    } else {
+        return findMin(nums.slice(middle + 1))
+    }
+};
+
+//recursive
+var findMin = function (nums) {
+    if (nums.length === 1 || nums[0] < nums[nums.length - 1]) return nums[0]
+    let middle = Math.floor(nums.length / 2);
+    let start = nums[0];
+    if (nums[middle] < nums[middle - 1]) {
+        return nums[middle]
+    } else if (nums[middle] < start) {
+        return findMin(nums.slice(0, middle))
+    } else {
+        return findMin(nums.slice(middle + 1))
+    }
+};
+
+//Two pointers
+var findMin = function (nums) {
+    let left = 0;
+    let right = nums.length - 1;
+    while (left < right) {
+        if (nums[left] < nums[right]) return nums[left];
+        let middle = Math.floor((left + right) / 2);
+        if (nums[middle] > nums[right]) {
+            left = middle + 1
+        } else {
+            right = middle
+        }
+    }
+    return nums[left]
+};
+
+
+//DYNAMIC PROGRAMMING
