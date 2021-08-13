@@ -64,3 +64,35 @@ var containsDuplicate = function (nums) {
     }
     return false
 };
+
+//Product of array except self
+
+//two nested loops, failed on time
+var productExceptSelf = function (nums) {
+    let newArr = new Array(nums.length).fill(1);
+    for (let i = 0; i < nums.length; i++) {
+        let val = nums[i];
+        for (let j = 0; j < nums.length; j++) {
+            if (j !== i) {
+                newArr[i] *= nums[j]
+            }
+        }
+    }
+    return newArr
+};
+
+//two independent loops (time 18%, space 40%)
+var productExceptSelf = function (nums) {
+    let lefts = new Array(nums.length)
+    lefts[0] = 1;
+    for (let i = 1; i < nums.length; i++) {
+        lefts[i] = lefts[i - 1] * nums[i - 1]
+    }
+
+    let right = 1;
+    for (let j = nums.length - 1; j >= 0; j--) {
+        lefts[j] *= right;
+        right *= nums[j]
+    }
+    return lefts
+};
