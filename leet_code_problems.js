@@ -1524,3 +1524,39 @@ var invertTree = function (root) {
     root.right = left
     return root
 };
+
+var merge = function(nums1, m, nums2, n) {
+    nums1.splice(m, n)
+    let i = 0;
+
+    while (i < nums1.length) {
+        if (nums2[0] <= nums1[i]) {
+            nums1.splice(i, 0, nums2.shift());
+        }
+        console.log(nums1)
+        i++
+    }
+    if (nums2.length > 0) {
+        nums1.push(...nums2)
+    }
+};
+
+var singleNumber = function (nums) {
+    let numsObj = {};
+    for (let i = 0; i < nums.length; i++) {
+        if (numsObj[nums[i]]) {
+            delete numsObj[nums[i]]
+        } else {
+            numsObj[nums[i]] = true
+        }
+    }
+    return Object.keys(numsObj)[0];
+};
+
+var singleNumber = function (nums) {
+    let a = 0;
+    nums.forEach(number => {
+        a ^= number
+    })
+    return a;
+};
