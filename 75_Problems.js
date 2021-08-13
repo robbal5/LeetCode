@@ -225,3 +225,18 @@ var findMin = function (nums) {
 
 
 //DYNAMIC PROGRAMMING
+
+//Memoization
+var climbStairs = function (n) {
+    let memo = {}
+    function climb(number) {
+        if (number == 1) return 1;
+        if (number == 0) return 1;
+        let firstClimb = memo[number - 1] || climb(number - 1);
+        let secondClimb = memo[number - 2] || climb(number - 2)
+        memo[number - 1] = firstClimb;
+        memo[number - 2] = secondClimb;
+        return firstClimb + secondClimb
+    }
+    return climb(n)
+};
