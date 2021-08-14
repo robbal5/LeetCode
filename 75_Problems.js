@@ -273,3 +273,60 @@ var coinChange = function (coinsTotal, amountTotal) {
     console.log(memo)
     return result;
 };
+
+//Longest Increasing Subsequence
+var lengthOfLIS = function (nums) {
+    let tails = [nums[0]];
+    let value, placed;
+    for (let i = 1; i < nums.length; i++) {
+        value = nums[i];
+        placed = false;
+        for (let j = 0; j < tails.length; j++) {
+            if (value <= tails[j]) {
+                tails[j] = value;
+                placed = true;
+                break;
+            }
+        }
+        if (!placed) tails.push(value)
+    }
+    console.log(tails)
+    return tails.length
+};
+
+
+// Intervals
+
+var insert = function (intervals, newInterval) {
+    if (intervals.length === 0) {
+        return [newInterval]
+    }
+    let start;
+    let inserted = false;
+    for (let i = 0; i < intervals.length; i++) {
+        if (intervals[i][1] >= newInterval[0] && newInterval[1] >= intervals[i][0]) {
+            intervals[i] = [Math.min(intervals[i][0], newInterval[0]), Math.max(intervals[i][1], newInterval[1])]
+            start = i;
+            inserted = true;
+            break;
+        }
+    }
+    if (!inserted) {
+        intervals.push(newInterval)
+        intervals.sort((a, b) => {
+            return a[0] - b[0]
+        })
+        return intervals
+    }
+    console.log(intervals)
+    let newSet = [intervals[0]];
+    for (let i = 0; i < intervals.length; i++) {
+        let lastInterval = newSet[newSet.length - 1];
+        if (intervals[i][0] <= lastInterval[1]) {
+            newSet[newSet.length - 1] = [lastInterval[0], Math.max(intervals[i][1], lastInterval[1])]
+        } else {
+            newSet.push(intervals[i])
+        }
+    }
+    return newSet;
+};
