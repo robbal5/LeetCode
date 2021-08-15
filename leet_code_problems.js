@@ -1560,3 +1560,25 @@ var singleNumber = function (nums) {
     })
     return a;
 };
+
+var countAndSay = function (n) {
+    if (n == 1) return '1'
+    return convert(countAndSay(n - 1))
+};
+
+var convert = function (string) {
+    let result = '';
+    let currentChar = string[0];
+    let currentCount = 1;
+    for (let i = 1; i < string.length; i++) {
+        if (currentChar == string[i]) {
+            currentCount += 1;
+        } else {
+            result += currentCount.toString() + currentChar;
+            currentChar = string[i];
+            currentCount = 1
+        }
+    }
+    result += currentCount.toString() + currentChar;
+    return result;
+}
