@@ -1582,3 +1582,43 @@ var convert = function (string) {
     result += currentCount.toString() + currentChar;
     return result;
 }
+
+function reverseInParentheses(inputString) {
+    let newString = '';
+    let openParenth = false;
+    let lastOpen;
+    let lastClosed;
+    let subString = '';
+    let parenthPosition = [];
+    for (let i = 0; i < inputString.length; i++) {
+        let char = inputString[i];
+        console.log(char)
+        if (char == '(') {
+            openParenth = true;
+            parenthPosition.push(i);
+        } else if (char == ')') {
+            currOpen = parenthPosition.pop()
+            let newWord = inputString.slice(currOpen + 1, lastOpen || i)
+            lastOpen = currOpen;
+            console.log(newWord)
+            subString = reverseWord(newWord + subString)
+            if (parenthPosition.length == 0) {
+                newString += subString;
+                subString = '';
+                openParenth = false;
+                lastOpen = null;
+            }
+        } else {
+            if (!openParenth) {
+                newString += inputString[i]
+            }
+        }
+
+
+    }
+    return newString;
+}
+
+function reverseWord(word) {
+    return word.split('').reverse().join('')
+}
