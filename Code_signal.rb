@@ -38,3 +38,41 @@ def boxBlur(image)
     end
     return new_image
 end
+
+def minesweeper(matrix)
+    rows = matrix.length
+    columns = matrix[0].length
+    result = Array.new(rows) {Array.new(columns)}
+    directions = [[1,0], [1,1], [1,-1], [0,1], [0,-1],[-1,1],[-1,0], [-1,-1]]
+    rows.times do |row|
+        columns.times do |column|
+            sum = 0
+            directions.each do |a,b|
+                new_row = row + a
+                new_col = column + b
+                next if ([new_row,new_col].min < 0 || new_row >= rows || new_col >= columns)
+                if (matrix[new_row][new_col])
+                    sum += 1
+                end
+            end
+            result[row][column] = sum
+        end
+    end
+    result
+end
+
+def absoluteValuesSumMinimization(a)
+    return a[0] if (a.length == 1)
+    values = Hash.new {|h,k| h[k] = 0}
+    a.each_with_index do |num, idx|
+        a.each_with_index do |num2, idx2|
+            next if (idx == idx2)
+            values[idx] += (num - num2).abs
+        end
+    end
+    array = values.to_a.sort do |a,b|
+        a[1] - b[1]
+    end
+    print array
+    a[array[0][0]]
+end
