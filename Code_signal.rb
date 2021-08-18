@@ -139,5 +139,39 @@ def arrayMaxConsecutiveSum(inputArray, k)
         max_sum = sum > max_sum ? sum : max_sum
     end
     max_sum
+end
+
+def bishopAndPawn(bishop, pawn)
+    letters = 'abcdefgh'
+    white_col, white_row = bishop.split('')
+     black_col, black_row = pawn.split('')
+     white_col = letters.index(white_col) + 1
+     black_col = letters.index(black_col) + 1
+     white_row = white_row.to_i
+     black_row = black_row.to_i
+
+    if (white_col < black_col)
+        if (white_row < black_row)
+            return (black_col - white_col == black_row - white_row)
+        elsif (white_row > black_row)
+            return (white_row - black_row == black_col - white_col)
+        else
+            return false
+        end
+    
+    elsif (white_col > black_col)
+        if (white_row < black_row)
+            return (white_col - black_col == black_row - white_row)
+        elsif (white_row > black_row)
+            return (white_col - black_col == white_row - black_row)
+        else
+            return false
+        end
+    else
+        return false
     end
+
+    
+end
+
     
