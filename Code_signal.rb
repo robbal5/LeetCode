@@ -114,3 +114,17 @@ def possibleSums(coins, quantity)
         end
     sums.size - 1
 end
+
+def extractEachKth(inputArray, k)
+    start = inputArray.length - 1
+    while (start >= 0)
+        if ((start+1) % k == 0)
+            
+            inputArray.delete_at(start)
+            start -=k
+        else
+            start -= 1
+        end
+    end
+    inputArray
+end
