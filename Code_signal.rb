@@ -128,3 +128,16 @@ def extractEachKth(inputArray, k)
     end
     inputArray
 end
+
+def arrayMaxConsecutiveSum(inputArray, k)
+    sum = inputArray.take(k).sum
+    max_sum = sum
+    (0...inputArray.length - k).each do |position|
+        sum -= inputArray[position]
+        sum += inputArray[position + k]
+        puts sum
+        max_sum = sum > max_sum ? sum : max_sum
+    end
+    max_sum
+    end
+    
