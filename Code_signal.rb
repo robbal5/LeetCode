@@ -76,3 +76,41 @@ def absoluteValuesSumMinimization(a)
     print array
     a[array[0][0]]
 end
+
+function groupingDishes(dishes) {
+    let resultHash = {};
+    for (let i = 0; i<dishes.length; i++) {
+        let dish = dishes[i][0];
+        for (let j = 1; j<dishes[i].length; j++) {
+            let ingredient = dishes[i][j];
+            if (resultHash[ingredient] === undefined) {
+                resultHash[ingredient] = [dish]
+            } else {
+                resultHash[ingredient].push(dish)
+            }
+        }
+    }
+    let result = Object.entries(resultHash).map(([key, values]) => {
+            return [key, ...values.sort()]
+    })  
+    return result.filter(row => {
+        return row.length > 2
+    }).sort()
+}
+
+def possibleSums(coins, quantity)
+    sums = Set.new([0])
+   coin_and_count = coins.zip(quantity)
+        for combo in coin_and_count 
+            next_set = Set.new
+            sums.each do |value|
+                coin_count = 1
+                while (coin_count <= combo[1])
+                    next_set.add(value + coin_count * combo[0])
+                    coin_count += 1
+                end
+            end
+            sums = sums | next_set
+        end
+    sums.size - 1
+end
