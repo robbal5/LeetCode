@@ -174,4 +174,41 @@ def bishopAndPawn(bishop, pawn)
     
 end
 
+def largestValuesInTreeRows(t)
+    return [] if !t
+    currentRow = [t]
+    nextRow = []
+    result = []
+    while (currentRow.length > 0)
+        maxValue = currentRow[0].value
+        currentRow.each do |node|
+            maxValue = node.value if node.value > maxValue
+            nextRow << node.left if node.left
+            nextRow << node.right if node.right
+        end
+        result << maxValue
+        currentRow = nextRow
+        nextRow = []
+    end
+    return result
+end
+
+def digitTreeSum(t)
+    total = 0
+    return total if (!t) 
+    queue = [[t,'']]
+    while (queue.length > 0)
+        current_node, prev_digit = queue.shift
+        current_digit = prev_digit + current_node.value.to_s
+        if (!current_node.left && !current_node.right)
+            total += current_digit.to_i
+        else
+            queue.push([current_node.left, current_digit]) if current_node.left
+            queue.push([current_node.right, current_digit]) if current_node.right
+        end
+    end
+    total
+end
+
+
     
