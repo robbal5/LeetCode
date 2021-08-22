@@ -625,7 +625,7 @@ let MinHeap = function() {
         if (heap.length > 2) {
             let index = heap.length - 1;
             while (heap[index] < heap[Math.floor(index / 2)]) {
-                if (idx>=1) {
+                if (index>=1) {
                     [heap[Math.floor(idx/2)], heap[index]] = [heap[index], heap[Math.floor(index/2)]];
                     if (Math.floor(index/2) > 1) {
                         index = Math.floor(index/2)
