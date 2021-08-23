@@ -21,3 +21,31 @@ function sudoku2(grid) {
     }
     return true
 }
+
+function isCryptSolution(crypt, solution) {
+    let solutionHash = {};
+    solution.forEach(([char, value]) => {
+        solutionHash[char] = value
+    })
+    let testSum = 0;
+    let solutionSum = 0;
+    let result = true;
+    crypt.forEach((string, index) => {
+        let subSum = '';
+        for (let i = 0; i < string.length; i++) {
+
+            let char = string[i];
+            if (i == 0 && solutionHash[char] == '0' && string.length > 1) {
+                result = false
+                break
+            }
+            subSum += solutionHash[char]
+        }
+        if (index < 2) {
+            testSum += parseInt(subSum)
+        } else {
+            solutionSum = parseInt(subSum)
+        }
+    })
+    return result && testSum == solutionSum
+}
