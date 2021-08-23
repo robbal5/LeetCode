@@ -85,3 +85,26 @@ function reverseLinkedList(head) {
     return prev
 }
 
+function addTwoHugeNumbers(a, b) {
+    aReverse = reverseLinkedList(a);
+    bReverse = reverseLinkedList(b);
+    let head = new ListNode(null);
+    let newList = head;
+    let aValue, bValue, newValue;
+    let remainder = 0;
+
+    while (aReverse || bReverse) {
+        aValue = aReverse ? aReverse.value : 0;
+        bValue = bReverse ? bReverse.value : 0;
+        newValue = aValue + bValue + remainder
+        remainder = Math.floor(newValue / 10000)
+        newList.next = new ListNode((newValue % 10000))
+        newList = newList.next
+        aReverse = aReverse ? aReverse.next : aReverse;
+        bReverse = bReverse ? bReverse.next : bReverse;
+    }
+    if (remainder !== 0) {
+        newList.next = new ListNode(remainder)
+    }
+    return reverseLinkedList(head.next)
+}
