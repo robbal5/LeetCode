@@ -1622,3 +1622,38 @@ function reverseInParentheses(inputString) {
 function reverseWord(word) {
     return word.split('').reverse().join('')
 }
+
+var evalRPN = function (tokens) {
+    let numbers = [];
+    let operations = '*+/-';
+    let value, val1, val2, result;
+    for (let i = 0; i < tokens.length; i++) {
+        let value = tokens[i];
+        if (operations.includes(value)) {
+            val1 = numbers.pop();
+            val2 = numbers.pop();
+        }
+        switch (value) {
+            case '+':
+                result = val1 + val2;
+                numbers.push(result)
+                break;
+            case '-':
+                result = val2 - val1
+                numbers.push(result)
+                break;
+            case '*':
+                result = val2 * val1
+                numbers.push(result)
+                break;
+            case '/':
+                result = Math.trunc(val2 / val1)
+                numbers.push(result)
+                break;
+            default:
+                numbers.push(parseInt(value))
+        }
+        console.log(numbers)
+    }
+    return numbers[0]
+};
