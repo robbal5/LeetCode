@@ -133,3 +133,51 @@ function mergeTwoLinkedLists(l1, l2) {
     }
     return mergedList.next
 }
+
+function reverseNodesInKGroups(l, k) {
+    let head = null;
+    let lastToGo = null;
+    let currentStart = l;
+    let currentNode = l;
+    let reversed, last;
+    let lastSeen;
+    nodes = 1;
+    while (currentNode) {
+        if (nodes % k == 0) {
+            nodes = 0;
+            currentNode = currentNode.next
+            lastSeen = currentNode;
+            let [reversed, newLast] = reverseSegment(currentStart, k)
+            if (head === null) {
+                head = reversed
+                last = newLast
+            } else {
+                last.next = reversed;
+                last = newLast;
+            }
+
+            currentStart = currentNode
+        } else {
+            currentNode = currentNode.next
+        }
+        nodes += 1
+    }
+    if (nodes !== 0) {
+        last.next = lastSeen
+    }
+    function reverseSegment(node, value) {
+        let head = node
+        let start = 0;
+        let prev = null
+        let next
+        while (start < value && node) {
+            next = node.next
+            node.next = prev
+            prev = node
+            node = next
+            start += 1
+        }
+        return [prev, head]
+    }
+    return head
+}
