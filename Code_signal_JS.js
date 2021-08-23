@@ -108,3 +108,28 @@ function addTwoHugeNumbers(a, b) {
     }
     return reverseLinkedList(head.next)
 }
+
+function mergeTwoLinkedLists(l1, l2) {
+    let mergedList = new ListNode(null);
+    let mergeNode = mergedList;
+    let firstVal, secondVal;
+    while (l1 && l2) {
+        firstVal = l1.value;
+        secondVal = l2.value;
+        if (firstVal < secondVal) {
+            mergeNode.next = l1;
+            mergeNode = mergeNode.next
+            l1 = l1.next
+        } else {
+            mergeNode.next = l2;
+            mergeNode = mergeNode.next
+            l2 = l2.next
+        }
+    }
+    if (l1) {
+        mergeNode.next = l1
+    } else if (l2) {
+        mergeNode.next = l2
+    }
+    return mergedList.next
+}
