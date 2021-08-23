@@ -49,3 +49,39 @@ function isCryptSolution(crypt, solution) {
     })
     return result && testSum == solutionSum
 }
+
+function isListPalindrome(l) {
+    if (!l) return true;
+    let slow = l;
+    let fast = l;
+    while (fast.next && fast.next.next) {
+        slow = slow.next
+        fast = fast.next.next
+    }
+    let startToReverse = slow.next;
+    let newList = reverseLinkedList(startToReverse);
+    let testNode = l;
+    while (newList) {
+        if (testNode.value != newList.value) {
+            return false
+        } else {
+            testNode = testNode.next
+            newList = newList.next
+        }
+    }
+    return true
+}
+
+function reverseLinkedList(head) {
+    if (!head) return head;
+    let prev = null;
+    let next;
+    while (head) {
+        next = head.next
+        head.next = prev
+        prev = head
+        head = next
+    }
+    return prev
+}
+
