@@ -1659,23 +1659,23 @@ var evalRPN = function (tokens) {
 };
 
 //Trap Rainwater
-var trap = function(height) {
+var trap = function (height) {
     let size = height.length
     if (size == 0) return 0;
     let leftMaxes = [height[0]];
     let rightMaxes = new Array(size);
-    rightMaxes[size-1] = height[size-1]
-    for (let i = 1; i<size; i++) {
-        leftMaxes[i] = Math.max(leftMaxes[i-1], height[i])
+    rightMaxes[size - 1] = height[size - 1]
+    for (let i = 1; i < size; i++) {
+        leftMaxes[i] = Math.max(leftMaxes[i - 1], height[i])
     }
-    for (let j = size-2; j>=0; j--) {
-        rightMaxes[j] = Math.max(rightMaxes[j+1], height[j])
+    for (let j = size - 2; j >= 0; j--) {
+        rightMaxes[j] = Math.max(rightMaxes[j + 1], height[j])
     }
     let total = 0;
-    for(let m = 0; m<size; m++) {
+    for (let m = 0; m < size; m++) {
         total += Math.min(leftMaxes[m], rightMaxes[m]) - height[m]
     }
     return total
-    
-    
+
+
 };

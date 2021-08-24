@@ -87,3 +87,16 @@ function checkPalindrome(string) {
     })
     return odds <= 1
 }
+
+function wordMap(string) {
+    let wordCloud = new Map();
+    string.split(' ').forEach(word => {
+        word = word.toLowerCase();
+        if (wordCloud.has(word)) {
+            wordCloud.set(word, wordCloud.get(word) + 1)
+        } else {
+            wordCloud.set(word, 1)
+        }
+    })
+    return wordCloud;
+}
