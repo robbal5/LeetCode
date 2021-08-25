@@ -199,3 +199,18 @@ function electionsWinners(votes, k) {
     })
     return possibleWinners;
 }
+
+function isMAC48Address(inputString) {
+    let possibleChars = 'ABCDEF0123456789';
+    let inputArray = inputString.split('-');
+    if (inputArray.length !== 6) return false;
+    for (let i = 0; i < inputArray.length; i++) {
+        let group = inputArray[i];
+        if (group.length != 2) return false;
+        for (let j = 0; j < 2; j++) {
+            let char = group[j];
+            if (!possibleChars.includes(char)) return false
+        }
+    }
+    return true;
+}
