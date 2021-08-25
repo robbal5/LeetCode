@@ -380,3 +380,41 @@ function rearrangeLastN(l, n) {
 
 
 }
+function rearrangeLastN(l, n) {
+    if (l == null || n == 0) return l;
+    let length = 0;
+    currentNode = l;
+    while (currentNode) {
+        length++
+        currentNode = currentNode.next;
+    }
+    if (n >= length) return l
+    let prevNode;
+    let newHead = l;
+    while (length > n) {
+        prevNode = newHead;
+        newHead = newHead.next;
+        length--
+    }
+    prevNode.next = null;
+    currNode = newHead;
+    while (currNode.next) {
+        currNode = currNode.next
+    }
+    currNode.next = l
+    return newHead
+}
+
+function findProfession(level, pos) {
+    if (level == 1) {
+        return 'Engineer'
+    }
+
+    if (findProfession(level - 1, Math.floor((pos + 1) / 2)) == 'Doctor') {
+        return pos % 2 > 0 ? 'Doctor' : 'Engineer'
+    }
+    return pos % 2 > 0 ? 'Engineer' : 'Doctor'
+
+
+
+}
