@@ -1679,3 +1679,24 @@ var trap = function (height) {
 
 
 };
+
+//560 Subarray Sum equal to K
+
+var subarraySum = function (nums, k) {
+    let count = 0;
+    let sum = 0;
+    let sumHash = { 0: 1 };
+    for (let i = 0; i < nums.length; i++) {
+        sum += nums[i];
+        if (sumHash.hasOwnProperty(sum - k)) {
+            count += sumHash[sum - k]
+        }
+        if (sumHash.hasOwnProperty(sum)) {
+            sumHash[sum] += 1
+        } else {
+            sumHash[sum] = 1;
+        }
+    }
+    console.log(sumHash)
+    return count;
+};

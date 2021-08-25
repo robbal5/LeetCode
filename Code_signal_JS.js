@@ -246,3 +246,84 @@ function lineEncoding(s) {
     newString += count > 1 ? (count.toString() + currentChar) : currentChar;
     return newString;
 }
+
+function minesweeperClick(field, x, y) {
+    let rows = field.length;
+    let cols = field[0].length
+    let visited = new Set();
+    let queue = [[x, y]];
+    let newMatrix = [];
+    let currentBombs;
+    let directions = [[1, 0], [1, 1], [1, -1], [-1, 0], [-1, 1], [-1, -1], [0, 1], [0, -1]];
+    for (let i = 0; i < rows; i++) {
+        newMatrix[i] = [];
+        for (let j = 0; j < cols; j++) {
+            newMatrix[i][j] = -1
+        }
+    }
+    visited.add([x, y].join(''))
+
+    while (queue.length > 0) {
+        let currentPosition = queue.shift();
+        if (field[currentPosition[0]][currentPosition[1]]) continue;
+        currentBombs = checkNeighbors(field, currentPosition[0], currentPosition[1]);
+        if (currentBombs == 0) {
+            directions.forEach(([xDif, yDif]) => {
+                newX = currentPosition[0] + xDif;
+                newY = currentPosition[1] + yDif;
+                newX = (newX >= 0 && newX < rows) ? newX : null;
+                newY = (newY >= 0 && newY < cols) ? newY : null;
+                if (newX !== null && newY !== null) {
+                    if (visited.has([newX, newY].join(''))) {
+
+                    } else {
+                        visited.add([newX, newY].join(''))
+                        queue.push([newX, newY]);
+                    }
+                }
+            })
+
+        }
+        newMatrix[currentPosition[0]][currentPosition[1]] = currentBombs;
+    }
+    return newMatrix
+}
+
+
+function checkNeighbors(field, x, y) {
+    let cols = field[0].length;
+    let rows = field.length
+    let directions = [[1, 0], [1, 1], [1, -1], [-1, 0], [-1, 1], [-1, -1], [0, 1], [0, -1]];
+    let bombs = 0;
+    let newX, newY;
+    directions.forEach(([xDif, yDif]) => {
+        newX = x + xDif;
+        newY = y + yDif;
+        newX = (newX >= 0 && newX < rows) ? newX : null;
+        newY = (newY >= 0 && newY < cols) ? newY : null;
+        if (newX !== null && newY !== null && field[newX][newY]) {
+
+            bombs += 1;
+        }
+    })
+
+    return bombs;
+}
+
+
+// field:
+[[false, false, false],
+[false, false, false],
+[false, false, false],
+[false, true, true],
+[false, false, false]]
+// x: 1
+// y: 0
+// Expected Output:
+// [[0, 0, 0],
+// [0, 0, 0],
+// [1, 2, 2],
+// [-1, -1, -1],
+// [-1, -1, -1]]
+
+
