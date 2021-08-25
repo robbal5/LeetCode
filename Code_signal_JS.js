@@ -204,7 +204,21 @@ function isMAC48Address(inputString) {
     let possibleChars = 'ABCDEF0123456789';
     let inputArray = inputString.split('-');
     if (inputArray.length !== 6) return false;
-    for (let i = 0; i < inputArray.length; i++) {
+    for (let i = 0; i < inputArray.length; i++) {function isMAC48Address(inputString) {
+    let possibleChars = 'ABCDEF0123456789';
+    let inputArray = inputString.split('-');
+    if (inputArray.length !== 6) return false;
+    for (let i = 0; i <inputArray.length; i++) {
+        let group = inputArray[i];
+        if (group.length != 2) return false;
+        for (let j = 0; j< 2; j++) {
+            let char = group[j];
+            if (!possibleChars.includes(char)) return false
+        }
+    }
+    return true;
+}
+
         let group = inputArray[i];
         if (group.length != 2) return false;
         for (let j = 0; j < 2; j++) {
@@ -213,4 +227,22 @@ function isMAC48Address(inputString) {
         }
     }
     return true;
+}
+
+function lineEncoding(s) {
+    let newString = '';
+    let count = 1;
+    let currentChar = s[0];
+    for (let i = 1; i < s.length; i++) {
+        let testChar = s[i];
+        if (testChar == currentChar) {
+            count++
+        } else {
+            newString += count > 1 ? (count.toString() + currentChar) : currentChar;
+            currentChar = testChar;
+            count = 1
+        }
+    }
+    newString += count > 1 ? (count.toString() + currentChar) : currentChar;
+    return newString;
 }
