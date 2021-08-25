@@ -327,3 +327,56 @@ function checkNeighbors(field, x, y) {
 // [-1, -1, -1]]
 
 
+function rearrangeLastN(l, n) {
+    if (l == null || n == 0) return l;
+    let oldHead = l;
+    let slowNode = l;
+    let fastNode = l;
+    let counter = 1;
+    let prevNode;
+    while (fastNode.next && fastNode.next.next) {
+        counter++;
+        prevNode = slowNode;
+        slowNode = slowNode.next;
+        fastNode = fastNode.next.next;
+    }
+    console.log(slowNode.value)
+    if (counter == n) {
+        prevNode.next = null;
+        currentNode = slowNode;
+        while (currentNode.next) {
+            currentNode = currentNode.next
+        }
+        currentNode.next = oldHead;
+        return slowNode
+    } else if (counter < n) {
+        currentNode = oldHead;
+        remainingNodes = counter
+        let moved = false
+        while (remainingNodes > (n - counter)) {
+            prevNode = currentNode;
+            currentNode = currentNode.next
+            moved = true;
+        }
+        if (!moved) return currentNode
+        while (currentNode.next) {
+            currentNode = currentNode.next;
+        }
+        currentNode.next = oldHead;
+        prevNode.next = null
+        return currentNode
+
+    } else if (counter > n) {
+        currentNode = slowNode;
+        while (counter > n) {
+            prevNode = currentNode;
+            currentNode = currentNode.next;
+            counter--
+        }
+        prevNode.next = null;
+        currentNode.next = oldHead;
+        return currentNode
+    }
+
+
+}
