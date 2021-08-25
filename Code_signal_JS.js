@@ -418,3 +418,17 @@ function findProfession(level, pos) {
 
 
 }
+
+function kthSmallestInBST(t, k) {
+    let values = [];
+    function grabValue(node) {
+        if (values.length < k) {
+            if (node.left) grabValue(node.left)
+            values.push(node.value)
+            if (node.right) grabValue(node.right)
+        }
+
+    }
+    grabValue(t)
+    return values[k - 1]
+}
