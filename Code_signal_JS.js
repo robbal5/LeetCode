@@ -181,3 +181,21 @@ function reverseNodesInKGroups(l, k) {
     }
     return head
 }
+
+function electionsWinners(votes, k) {
+    let max = Number.NEGATIVE_INFINITY;
+    let multiple_maxes = false;
+    votes.forEach(number => {
+        if (number > max) {
+            max = number;
+            multiple_maxes = false;
+        } else if (number == max) {
+            multiple_maxes = true
+        }
+    })
+    let possibleWinners = 0;
+    votes.forEach(number2 => {
+        if (number2 + k > max || (number2 == max && !multiple_maxes)) possibleWinners += 1;
+    })
+    return possibleWinners;
+}
