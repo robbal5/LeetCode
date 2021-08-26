@@ -432,3 +432,21 @@ function kthSmallestInBST(t, k) {
     grabValue(t)
     return values[k - 1]
 }
+
+function kthSmallestInBST(t, k) {
+    let value;
+    let count = 0;
+    function grabValue(node) {
+        if (!node) return;
+        grabValue(node.left)
+        count++
+        if (count == k) {
+            value = node.value;
+            return
+        }
+        grabValue(node.right)
+    }
+    grabValue(t)
+    return value;
+}
+ 

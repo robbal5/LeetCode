@@ -1700,3 +1700,18 @@ var subarraySum = function (nums, k) {
     console.log(sumHash)
     return count;
 };
+
+var balancedStringSplit = function(s) {
+    let count = 0;
+    let state = 0;
+    for (let i =0; i<s.length; i++) {
+        let char = s[i]
+        if (char == 'L' ) {
+            state++
+        } else {
+            state--
+        }
+        if (state == 0) count++
+    }
+    return count;
+};
