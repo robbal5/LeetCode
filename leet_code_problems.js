@@ -1721,15 +1721,38 @@ var wordBreak = function (s, wordDict) {
     let memo = {};
     let wordSet = new Set(wordDict)
     checkWord = function (s) {
-        if (wordDict.includes(s) || s.length == 0) return true;
+        if (memo.hasOwnProperty(s)) {
+            return memo[s]
+        }
+        if (s.length == 0) return true;
         for (let i = s.length; i > 0; i--) {
-            let currSegment = s.slice(0, i);
-            if (wordSet.has(currSegment) && checkWord(s.slice(i))) {
+            
+            if (wordSet.has(s.slice(0,i)) && checkWord(s.slice(i))) {
+                memo[s] = true;
                 return true;
             }
         }
+        memo[s] = false;
         return false;
     }
     result = checkWord(s)
     return result
 };
+
+// Word Break solution 2: track up to that point in an array
+var wordBreak = function (s, wordDict) {
+    let wordSet = new Set(wordDict)
+    let results = new Array(s.length + 1).fill(false)
+    results[0] = true;
+    for (let i = 0; i < s.length; i++) {
+        if (!results[i]) continue;
+        for (let j = 1; j < s.length + 1; j++) {
+            if (wordSet.has(s.slice(i, j))) {
+                results[j] = true;
+            }
+        }
+    }
+    console.log(results)
+    return results[results.length - 1]
+};
+
