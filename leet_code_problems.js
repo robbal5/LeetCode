@@ -1756,3 +1756,27 @@ var wordBreak = function (s, wordDict) {
     return results[results.length - 1]
 };
 
+//Misinterpretation of the question, oops
+var combinationSum4 = function (nums, target) {
+    let combinations = {};
+    for (let i = 0; i < nums.length; i++) {
+        let val = nums[i];
+        if (val > target) continue;
+        Object.keys(combinations).forEach(key => {
+            newVal = val + parseInt(key);
+            if (newVal <= target) {
+                if (combinations.hasOwnProperty(newVal)) {
+                    combinations[newVal] += 1
+                } else {
+                    combinations[newVal] = 1
+                }
+            }
+        })
+        if (combinations.hasOwnProperty(val)) {
+            combinations[val] += 1;
+        } else {
+            combinations[val] = 1;
+        }
+    }
+    return combinations[target]
+};
