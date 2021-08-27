@@ -1905,3 +1905,56 @@ var removeNthFromEnd = function (head, n) {
     slow.next = slow.next.next;
     return start.next;
 };
+
+//Recursive
+var canJump = function (nums) {
+    let memo = {};
+    function jump(array, pos) {
+        if (memo.hasOwnProperty(pos)) {
+            return memo[pos]
+        }
+        if (array.length == 1) return true;
+        let maxJump = array[0];
+        if (maxJump >= array.length) return true;
+        for (let i = maxJump; i > 0; i--) {
+            if (jump(array.slice(i), pos + i)) {
+                memo[pos + i] = true;
+                return true;
+            }
+        }
+        memo[pos] = false;
+        return false;
+    }
+    return jump(nums, 0)
+
+};
+
+// Iterative
+var canJump = function (nums) {
+    let queue = [0];
+    let seen = new Set([0])
+    let queuePos = 0;
+    let currPosition;
+    while (queuePos < queue.length) {
+        currPosition = queue[queuePos]
+        if (currPosition >= nums.length - 1) return true;
+        let jumps = nums[currPosition]
+        for (let i = jumps; i > 0; i--) {
+            if (currPosition + i >= nums.length - 1) return true;
+            if (!seen.has(currPosition + i)) {
+                queue.push(currPosition + i)
+                seen.add(currPosition + i)
+            }
+        }
+        queuePos++
+    }
+}
+
+// Very efficient start from the back
+var canJump = function (nums) {
+    let lastPos = nums.length - 1;
+    for (let i = nums.length - 2; i >= 0; i--) {
+        if (nums[i] + i >= lastPos) lastPos = i;
+    }
+    return lastPos <= 0
+}
