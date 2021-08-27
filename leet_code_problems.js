@@ -1780,3 +1780,128 @@ var combinationSum4 = function (nums, target) {
     }
     return combinations[target]
 };
+
+//Recursive call, failed time
+var combinationSum4 = function (nums, target) {
+    if (target == 0) {
+        return 1;
+    }
+    let result = 0;
+    for (let i = 0; i < nums.length; i++) {
+        if (target >= nums[i]) {
+            result += combinationSum4(nums, target - nums[i])
+        }
+    }
+    return result;
+}
+
+//Recursion with memoization, passes time
+var combinationSum4 = function (nums, target) {
+    let memo = {};
+    function checkTarget(newTarget) {
+        if (newTarget == 0) {
+            return 1;
+        }
+        if (memo.hasOwnProperty(newTarget)) {
+            return memo[newTarget]
+        }
+
+        let result = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (newTarget >= nums[i]) {
+                result += checkTarget(newTarget - nums[i])
+            }
+        }
+        memo[newTarget] = result
+        return result;
+    }
+    let final = checkTarget(target)
+    return final
+
+}
+
+//House Robber
+var rob = function (nums) {
+    let results = new Array(nums.length + 1);
+    results[0] = 0;
+    results[1] = nums[0]
+    for (let i = 1; i < nums.length; i++) {
+        let val = nums[i];
+        results[i + 1] = Math.max(results[i], results[i - 1] + val)
+    }
+    return results[nums.length]
+};
+
+// House robber with variables
+var rob = function (nums) {
+    let results = new Array(nums.length + 1);
+    let prev = 0
+    let current = nums[0]
+    for (let i = 1; i < nums.length; i++) {
+        let val = nums[i];
+        let temp = current
+        current = Math.max(current, prev + val)
+        prev = temp
+
+    }
+    return current
+};
+
+//Remove Nth from end, Linked List
+var removeNthFromEnd = function (head, n) {
+    let length = 0;
+    if (!head) return head;
+    let currentNode = head;
+    while (currentNode) {
+        length++
+        currentNode = currentNode.next
+    }
+    let toRemove = (length - n + 1);
+    let newCount = 1;
+    let prev = null;
+    currentNode = head;
+    while (newCount + n <= length) {
+        prev = currentNode
+        currentNode = currentNode.next
+        newCount++
+    }
+    if (prev !== null) {
+        prev.next = currentNode.next
+        return head
+    } else {
+        return currentNode.next
+    }
+
+};
+
+var removeNthFromEnd = function (head, n) {
+    let start = new ListNode(0);
+    let slow = start;
+    let fast = start;
+    start.next = slow;
+    for (let i = 0; i < n; i++) {
+        fast = fast.next
+    }
+    while (fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    slow.next = slow.next.next;
+    return start.next;
+};
+
+var removeNthFromEnd = function (head, n) {
+    let start = new ListNode(0);
+    let slow = start;
+    let fast = start;
+    start.next = head;
+    for (let i = 0; i < n; i++) {
+        fast = fast.next
+    }
+    while (fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    slow.next = slow.next.next;
+    return start.next;
+};
