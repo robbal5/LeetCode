@@ -1958,3 +1958,52 @@ var canJump = function (nums) {
     }
     return lastPos <= 0
 }
+
+//Set Zeroes
+var setZeroes = function (matrix) {
+    let rows = new Set();
+    let cols = new Set();
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j] == 0) {
+                rows.add(i);
+                cols.add(j);
+            }
+        }
+    }
+    rows.forEach(rowVal => {
+        matrix[rowVal].fill(0)
+    })
+    cols.forEach(colVal => {
+        for (let m = 0; m < matrix.length; m++) {
+            matrix[m][colVal] = 0
+        }
+    })
+};
+
+//Spiral Matrix
+var spiralOrder = function (matrix) {
+    let seen = new Set(['00'])
+    let direction = [[0, 1], [-1, 0], [0, -1], [1, 0]]
+    let result = [matrix[0][0]];
+    let currDirection = 0;
+    let rows = matrix.length
+    let cols = matrix[0].length
+    let totalElements = rows * cols;
+    let currPosition = [0, 0]
+    let newX, newY;
+    while (result.length < totalElements) {
+        newX = currPosition[0] + direction[currDirection][0];
+        newY = currPosition[1] + direction[currDirection][1];
+        while (newX < 0 || newX >= rows || newY < 0 || newY >= cols || seen.has([newX, newY].join(''))) {
+            currDirection = ((currDirection + 1) % 4)
+            newX = currPosition[0] + direction[currDirection][0];
+            newY = currPosition[1] + direction[currDirection][1];
+
+        }
+        currPosition = [newX, newY];
+        seen.add(currPosition.join(''));
+        result.push(matrix[currPosition[0]][currPosition[1]])
+    }
+    return result;
+};
