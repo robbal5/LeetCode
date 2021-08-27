@@ -1715,3 +1715,21 @@ var balancedStringSplit = function(s) {
     }
     return count;
 };
+
+//Word Break solution 1
+var wordBreak = function (s, wordDict) {
+    let memo = {};
+    let wordSet = new Set(wordDict)
+    checkWord = function (s) {
+        if (wordDict.includes(s) || s.length == 0) return true;
+        for (let i = s.length; i > 0; i--) {
+            let currSegment = s.slice(0, i);
+            if (wordSet.has(currSegment) && checkWord(s.slice(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    result = checkWord(s)
+    return result
+};
