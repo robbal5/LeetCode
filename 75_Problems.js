@@ -1,3 +1,6 @@
+// ISSUES
+//Trees: Maximum Path Sum, Serialize Binary Tree
+
 //Two Sum
 
 //Hash (45% Speed, 54% space)
@@ -416,3 +419,69 @@ var levelOrder = function (root) {
     }
     return result;
 };
+
+var isSubtree = function (root, subRoot) {
+    function isSame(node1, node2) {
+        if (node1 == null && node2 == null) return true;
+        let oneVal = node1 ? node1.val : null;
+        let twoVal = node2 ? node2.val : null;
+        if (oneVal == twoVal) {
+            return isSame(node1.left, node2.left) && isSame(node1.right, node2.right)
+        } else {
+            return false;
+        }
+    }
+
+    let queue = [root];
+    let currNode;
+    while (queue.length > 0) {
+        currNode = queue.shift();
+        if (currNode.val == subRoot.val) {
+            if (isSame(currNode, subRoot)) {
+                return true
+            }
+        }
+        if (currNode.left) queue.push(currNode.left);
+        if (currNode.right) queue.push(currNode.right)
+    }
+    return false;
+};
+
+function preorderTraversal(root) {
+    let values = [];
+    function getValue(node) {
+        if (node == null) return;
+
+        values.push(node.val)
+        getValue(node.left)
+        getValue(node.right)
+    }
+    getValue(root)
+    return values;
+}
+
+function inorderTraversal(root) {
+    let values = [];
+    function getValue(node) {
+        if (node == null) return;
+        
+        getValue(node.left)
+        values.push(node.val)
+        getValue(node.right)
+    }
+    getValue(root)
+    return values;
+}
+
+function postorderTraversal(root) {
+    let values = [];
+    function getValue(node) {
+        if (node == null) return;
+
+        getValue(node.left)
+        getValue(node.right)
+        values.push(node.val)
+    }
+    getValue(root)
+    return values;
+}
