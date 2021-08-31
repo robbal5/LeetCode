@@ -501,3 +501,74 @@ var buildTree = function (preorder, inorder) {
     return makeTree(preorder, inorder)
 
 };
+
+//Valid BST
+var isValidBST = function (root) {
+    function checkNode(node, minimum, maximum) {
+        if (node == null) return true;
+        if (node.val <= minimum || node.val >= maximum) {
+            return false;
+        }
+        return (checkNode(node.left, minimum, node.val) && checkNode(node.right, node.val, maximum))
+    }
+    return checkNode(root);
+};
+
+//Kth smallest
+var kthSmallest = function (root, k) {
+    let values = [];
+    function traverse(node) {
+        if (node == null) return;
+        traverse(node.left)
+        if (values.length >= k) return;
+        values.push(node.val)
+        if (values.length >= k) return;
+        traverse(node.right)
+    }
+    traverse(root)
+    return values[k - 1]
+};
+
+//Lowest common Ancestor
+var lowestCommonAncestor = function (root, p, q) {
+    if (!root) return null;
+    let queue = [[root, []]]
+    let pAncestors, qAncestors, currNode, prev;
+    let ancestors;
+    while (!pAncestors || !qAncestors) {
+
+        [currNode, prev] = queue.shift()
+        ancestors = prev.concat(currNode)
+        if (currNode == p) {
+            pAncestors = ancestors
+        }
+        if (currNode == q) {
+            qAncestors = ancestors
+        }
+        if (currNode.left) queue.push([currNode.left, ancestors])
+        if (currNode.right) queue.push([currNode.right, ancestors])
+    }
+
+    let minLength = Math.min(pAncestors.length, qAncestors.length)
+    for (let i = 0; i < minLength; i++) {
+        if (pAncestors[i] !== qAncestors[i]) {
+            return pAncestors[i - 1] ? pAncestors[i - 1] : pAncestors[i]
+        }
+        if (i == minLength - 1) {
+            return pAncestors[i]
+        }
+    }
+};
+
+var lowestCommonAncestor = function (root, p, q) {
+    while (root) {
+        if (p.val < root.val && q.val < root.val) {
+            root = root.left
+        } else if (p.val > root.val && q.val > root.val) {
+            root = root.right
+        } else {
+            break
+        }
+    }
+    return root;
+}
