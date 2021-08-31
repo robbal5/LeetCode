@@ -307,7 +307,6 @@ var wordBreak = function (s, wordDict) {
             }
         }
     }
-    console.log(results)
     return results[results.length - 1]
 };
 
@@ -345,4 +344,43 @@ var insert = function (intervals, newInterval) {
         }
     }
     return newSet;
+};
+
+//TREES
+var maxDepth = function (root) {
+    let currentMaxDepth = 0;
+    function getDepth(node, value) {
+        if (node == null) {
+            currentMaxDepth = value > currentMaxDepth ? value : currentMaxDepth;
+        } else {
+            getDepth(node.left, value + 1)
+            getDepth(node.right, value + 1)
+        }
+    }
+
+    getDepth(root, 0);
+    return currentMaxDepth;
+};
+
+var isSameTree = function (p, q) {
+    let pQueue = [p]
+    let qQueue = [q]
+    let pNode, qNode, pVal, qVal
+    while (pQueue.length > 0) {
+        pNode = pQueue.shift();
+        qNode = qQueue.shift();
+        if (qNode == null && pNode == null) {
+            continue
+        }
+        pVal = pNode ? pNode.val : null;
+        qVal = qNode ? qNode.val : null;
+        if (pVal == qVal) {
+            if (pVal != null) pQueue.push(pNode.left, pNode.right)
+            if (qVal != null) qQueue.push(qNode.left, qNode.right)
+        } else {
+            return false
+        }
+
+    }
+    return pQueue.length == qQueue.length
 };
