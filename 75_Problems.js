@@ -384,3 +384,35 @@ var isSameTree = function (p, q) {
     }
     return pQueue.length == qQueue.length
 };
+
+var invertTree = function (root) {
+    if (root == null) return null;
+    let right = invertTree(root.right)
+    let left = invertTree(root.left)
+    root.left = right
+    root.right = left
+    return root
+};
+
+var levelOrder = function (root) {
+    if (!root) return [];
+    let result = [];
+    let queue = [root];
+    let currNode;
+    let nextQueue = [];
+    let currResult = [];
+    while (queue.length > 0) {
+        queue.forEach((node) => {
+            currResult.push(node.val)
+            if (node.left) {
+                nextQueue.push(node.left)
+            }
+            if (node.right) nextQueue.push(node.right)
+        })
+        result.push(currResult)
+        queue = nextQueue;
+        nextQueue = [];
+        currResult = [];
+    }
+    return result;
+};
