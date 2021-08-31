@@ -485,3 +485,19 @@ function postorderTraversal(root) {
     getValue(root)
     return values;
 }
+
+//build tree from pre and inorder arrays
+var buildTree = function (preorder, inorder) {
+    function makeTree(pre, inor) {
+        if (pre.length == 0) {
+            return null
+        }
+        let head = new TreeNode(pre[0]);
+        let rootPos = inor.indexOf(pre[0]);
+        head.left = makeTree(pre.slice(1, 1 + rootPos), inor.slice(0, rootPos))
+        head.right = makeTree(pre.slice(rootPos + 1), inor.slice(rootPos + 1))
+        return head;
+    }
+    return makeTree(preorder, inorder)
+
+};
