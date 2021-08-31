@@ -294,6 +294,22 @@ var lengthOfLIS = function (nums) {
     return tails.length
 };
 
+//Word Break
+var wordBreak = function (s, wordDict) {
+    let wordSet = new Set(wordDict)
+    let results = new Array(s.length + 1).fill(false)
+    results[0] = true;
+    for (let i = 0; i < s.length; i++) {
+        if (!results[i]) continue;
+        for (let j = 1; j < s.length + 1; j++) {
+            if (wordSet.has(s.slice(i, j))) {
+                results[j] = true;
+            }
+        }
+    }
+    console.log(results)
+    return results[results.length - 1]
+};
 
 // Intervals
 
