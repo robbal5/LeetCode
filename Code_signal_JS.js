@@ -450,3 +450,18 @@ function kthSmallestInBST(t, k) {
     return value;
 }
  
+ function chessKnight(cell) {
+    let moves = [[1,2],[1,-2],[-1,2],[-1,-2],[2,1],[2,-1],[-2,1],[-2,-1]]
+    let cols = '0abcdefgh';
+    let numberCell = [cols.indexOf(cell[0]), parseInt(cell[1])]
+    let possibleMoves = 0;
+    let newX, newY;
+    moves.forEach(([xPos, yPos]) => {
+        newX = numberCell[0] + xPos;
+        newY = numberCell[1] + yPos;
+        if (Math.min(newX, newY) >= 1 && Math.max(newX, newY) <= 8) {
+            possibleMoves++;
+        }
+    })
+    return possibleMoves
+}

@@ -572,7 +572,7 @@ let Trie = function() {
             node.keys.setEnd(input[0], new Node())
             return this.add(input.substr(1), node.keys.length(input[0]))
         } else {
-            return this.add(input.substr1, node.keys.length(input[0]))
+            return this.add(input.substr(1), node.keys.length(input[0]))
         }
     }
 
