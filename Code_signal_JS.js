@@ -465,3 +465,22 @@ function kthSmallestInBST(t, k) {
     })
     return possibleMoves
 }
+
+function deleteDigit(n) {
+    let string = n.toString();
+    let found = false;
+    let position = string.length - 1
+    for (let i = 0; i < string.length - 1; i++) {
+        if (parseInt(string[i]) < parseInt(string[i + 1])) {
+            position = i;
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        return parseInt(string.slice(0, position) + string.slice(position + 1))
+    } else {
+        return parseInt(string.slice(0, position))
+    }
+}
