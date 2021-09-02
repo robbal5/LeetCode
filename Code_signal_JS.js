@@ -484,3 +484,33 @@ function deleteDigit(n) {
         return parseInt(string.slice(0, position))
     }
 }
+
+function sumUpNumbers(inputString) {
+    let sum = 0;
+    let currDigit = '';
+    let numbers = '0123456789';
+    for (let i = 0; i < inputString.length; i++) {
+        if (numbers.indexOf(inputString[i]) !== -1) {
+            currDigit += inputString[i]
+        } else {
+            if (currDigit.length > 0) sum += parseInt(currDigit);
+            currDigit = '';
+        }
+    }
+    if (currDigit.length > 0) sum += parseInt(currDigit)
+    return sum;
+}
+
+function differentSquares(matrix) {
+    let rows = matrix.length;
+    let cols = matrix[0].length;
+    let found = new Set();
+    let testString = '';
+    for (let i = 0; i < rows - 1; i++) {
+        for (let j = 0; j < cols - 1; j++) {
+            testString = matrix[i][j].toString() + matrix[i][j + 1].toString() + matrix[i + 1][j].toString() + matrix[i + 1][j + 1].toString()
+            found.add(testString)
+        }
+    }
+    return found.size
+}
