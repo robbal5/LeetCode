@@ -113,3 +113,76 @@ def search(nums, target)
     end
         nums[left] == target ? left: -1;
 end
+
+require 'set'
+def three_sum(nums)
+    s = Set.new()
+    return [] if nums.length < 3
+    result = [];
+    for i in (0...nums.length-2)
+        for j  in (1...nums.length-1)
+           for m in (2...nums.length)
+              if (nums[i] + nums[j] + nums[m] == 0 && i != j && j != m && m != i) 
+                  string = [nums[i], nums[j],nums[m]].sort {|a,b| a-b}.join('')
+                  if (s.include?(string))
+                      next
+                  else
+                        result << [nums[i], nums[j], nums[m]] 
+                      s.add(string)
+                  end
+              end
+           end
+        end
+    end
+    result.sort
+end
+
+def three_sum(nums)
+    sorted = nums.sort
+    result = []
+    print sorted
+    for i in (0...nums.length - 2)
+       next if (sorted[i] > 0)
+       next if (i > 0 && sorted[i] == sorted[i- 1])
+        left = i + 1
+        right = sorted.length - 1
+        while (left < right)
+            sum = sorted[i] + sorted[left] + sorted[right]
+            if (sum > 0)
+                right-=1
+            elsif (sum < 0)
+                left+=1
+            else
+                result << [sorted[i], sorted[left], sorted[right]]
+            
+                while (left < right && sorted[left] == sorted[left + 1])
+                    left+=1
+                end
+                while (right > left && sorted[right] == sorted[right - 1])
+                    right-=1
+                end
+                left += 1
+                right -= 1
+            end
+        end
+    end
+    result
+end
+
+# Container with most water
+def max_area(height)
+    left = 0
+    right = height.length - 1
+    curr_max = 0
+    while (left < right)
+       curr_min = [height[left], height[right]].min
+        curr_total = curr_min*(right - left)
+        curr_max = curr_total > curr_max ? curr_total : curr_max
+        if (height[left]<= height[right])
+           left += 1
+        else
+            right -= 1
+        end
+    end
+    curr_max
+end
