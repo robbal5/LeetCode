@@ -69,3 +69,47 @@ def max_product(nums)
     end
     total_max
 end
+
+#Find Min sorted Array (logn)
+def find_min(nums)
+    return nums[0] if nums.length == 1
+    start = 0
+    last = nums.length - 1
+    return nums[start] if (nums[start] < nums[last])
+    while (start <= last)
+        middle = (start + last) / 2
+        return nums[middle+1] if (nums[middle] > nums[middle + 1])
+        return nums[middle] if (nums[middle] < nums[middle - 1]) 
+        curr_test = nums[middle]
+        if (curr_test > nums[0])
+            start = middle + 1
+        elsif (curr_test < nums[start])
+            last = middle -1
+        end
+    end
+    nums[start]
+end
+
+# Search in sorted array
+def search(nums, target)
+    left = 0
+    right = nums.length - 1
+    while (left <= right)
+       middle = (left + right) / 2
+        return middle if (nums[middle]) == target
+        if (nums[left] <= nums[middle])
+            if (target >= nums[left] && target < nums[middle])
+                right = middle - 1
+            else
+                left = middle + 1
+            end
+        else
+            if (target <= nums[right] && target > nums[middle])
+                left = middle + 1
+            else
+                right = middle - 1
+            end
+        end
+    end
+        nums[left] == target ? left: -1;
+end
