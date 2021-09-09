@@ -44,6 +44,7 @@ def product_except_self(nums)
     end
     right_result.zip(left_result).map { |a,b| a*b}
 end
+
 def max_sub_array(nums)
     curr_max_sum = nums[0]
     curr_sum = nums[0]
@@ -52,4 +53,19 @@ def max_sub_array(nums)
         curr_max_sum = [curr_sum, curr_max_sum].max
     end
     curr_max_sum
+end
+
+def max_product(nums)
+    curr_max = nums[0]
+    curr_min = nums[0]
+    total_max = nums[0]
+    for i in 1...nums.length
+        curr_value = nums[i]
+        test_max = [curr_max * curr_value, curr_min*curr_value, curr_value].max
+        test_min = [curr_max * curr_value, curr_min*curr_value, curr_value].min
+        curr_max = test_max
+        curr_min = test_min
+        total_max = [curr_max, total_max].max
+    end
+    total_max
 end
