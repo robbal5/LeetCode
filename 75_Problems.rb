@@ -244,3 +244,21 @@ def length_of_lis(nums)
         end
     result.length - 1
 end
+
+require 'set'
+def word_break(s, word_dict)
+    wordDict = Set.new(word_dict)
+    return true if wordDict.include?(s)
+    is_valid = Array.new(s.length + 1, false)
+    is_valid[0] = true;
+    for i in (1..s.length)
+       next if (!is_valid[i - 1]) 
+        for j in (i..s.length)
+            if (wordDict.include?(s[(i-1)...j]))
+               is_valid[j] = true 
+            end
+        end
+    end
+    print is_valid
+    is_valid[s.length]
+end
