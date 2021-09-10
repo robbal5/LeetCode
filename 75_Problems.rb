@@ -262,3 +262,20 @@ def word_break(s, word_dict)
     print is_valid
     is_valid[s.length]
 end
+
+def combination_sum4(nums, target)
+    dp = Array.new(target + 1, 0)
+    dp[0] = 1
+
+    for i in (1..target)
+       sum = 0
+        nums.each do |num|
+           curr = i - num
+            next if curr < 0
+            sum += dp[curr]
+        end
+        dp[i] = sum
+    end
+    dp[target]
+    
+end
