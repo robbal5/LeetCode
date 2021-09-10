@@ -186,3 +186,61 @@ def max_area(height)
     end
     curr_max
 end
+
+# Climbing Stairs
+
+def climb_stairs(n)
+    dp_array = Array.new(n)
+    dp_array[0] = 1
+    dp_array[1] = 1
+    for i in (2..n)
+       dp_array[i] = dp_array[i-1] + dp_array[i-2] 
+    end
+    dp_array[n]
+end
+
+#Tracks only two variables
+def climb_stairs(n)
+     return 1 if (n < 2)
+    two_back = 1
+    one_back = 1
+    (n-1).times do |i|
+        tmp = two_back
+        two_back = one_back
+        one_back = tmp + two_back
+    end
+    one_back
+end
+
+# coin change
+def coin_change(coins, amount)
+    sorted_coins = coins.sort
+    dp = Array.new(amount+1, amount+1)
+    dp[0] = 0
+    for i in (1..amount)
+       for j in (0...sorted_coins.length)
+          coin_value = sorted_coins[j];
+          break if (coin_value > amount)
+           dp[i] = [dp[i], 1 + dp[i - coin_value]].min
+       end
+    end
+    dp[amount] > amount ? -1 : dp[amount]
+end
+
+#Length of increasing subsequence
+def length_of_lis(nums)
+    result = [-1]
+    current_largest = -1
+    for i in (0...nums.length)
+        inserted = false
+        for j in (1...result.length)
+            if (nums[i] <=  result[j])
+                 result[j] = nums[i]
+                 inserted = true
+                 break
+             end
+          end
+        result << nums[i] if !inserted
+        end
+    result.length - 1
+end
