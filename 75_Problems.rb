@@ -279,3 +279,16 @@ def combination_sum4(nums, target)
     dp[target]
     
 end
+
+def rob(nums)
+    dp = Array.new(nums.length)
+    dp[0] = nums[0]
+    for i in (1...nums.length)
+        if (i == 1)
+            dp[i] = [nums[i], dp[i-1]].max
+        else
+            dp[i] = [nums[i] + dp[i-2], dp[i-1]].max 
+        end
+    end
+    dp[nums.length - 1]
+end
