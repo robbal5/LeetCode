@@ -292,3 +292,35 @@ def rob(nums)
     end
     dp[nums.length - 1]
 end
+
+def rob(nums)
+   return 0 if (nums.length == 0) 
+    previous1 = 0
+    previous2 = 0
+    for i in (0...nums.length) 
+        temp = previous1;
+        previous1 = [nums[i] + previous2, previous1].max
+        previous2 = temp
+    end
+    previous1
+end
+
+#House Robber pt 2
+def rob(nums)
+    return nums[0] if (nums.length < 2)
+    def littleRob(array)
+       dp = Array.new(array.length)
+        dp[0] = array[0]
+        for i in (1...array.length)
+           if (i == 1)
+               dp[i] = [array[i], dp[0]].max
+           else
+              dp[i] = [dp[i-1], dp[i - 2] + array[i]].max
+           end
+        end
+        dp[array.length - 1]
+    end
+    first = littleRob(nums[0...-1])
+    second = littleRob(nums[1..-1])
+    [first,second].max
+end
