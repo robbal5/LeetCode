@@ -733,3 +733,41 @@ function bfs(graph, root) {
     }
     return nodesLen;
 }
+
+//Code Kata
+
+function cache(func) {
+    // do your magic here
+    let result = {};
+    return function() {
+        let args = JSON.stringify(arguments)
+        if (!(args in result)) {
+            result[args] = func.apply(null, arguments)
+        }
+        return result[args]
+    }
+}
+
+function mixedFraction(s) {
+    //your code here
+    let [numerator, denom] = s.split('/')
+    numerator = parseInt(numerator)
+    denom = parseInt(denom)
+    if (denom == 0) throw new Error('zero division')
+    if (numerator == 0) return '0'
+    let negative = ((numerator < 0 || denom < 0) && !(numerator < 0 && denom < 0)) ? true : false;
+    numerator = Math.abs(numerator)
+    denom = Math.abs(denom)
+    let baseNum = (numerator >= denom) ? Math.floor(numerator / denom) : 0
+    let remainder = numerator % denom
+    for (i = remainder; i > 1; i--) {
+        if (denom % i == 0 && remainder % i == 0) {
+            denom = denom / i;
+            remainder = remainder / i;
+            break;
+        }
+    }
+    let remain = remainder > 0 ? (`${remainder}/${denom}`) : ''
+    return `${negative ? '-' : ''}${baseNum == 0 ? '' : baseNum}${baseNum > 0 && remain.length > 0 ? ' ' : ''}${remain}`
+
+}
